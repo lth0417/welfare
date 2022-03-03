@@ -12,4 +12,10 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/admin")
+    public String toAdmin(){
+        return "/backed/admin";
+    }
+
+
 }
