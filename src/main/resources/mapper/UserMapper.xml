@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.sise.welfare.mapper.UserMapper">
+
+    <select id="selectUserList" parameterType="cn.com.sise.welfare.model.UserSearchModel"
+            resultType="cn.com.sise.welfare.model.UserInfoModel">
+        select
+            u.id,
+            u.account,
+            u.password,
+            r.role,
+            u.name,
+            u.sfzh,
+            u.nation,
+            u.sex,
+            u.birth,
+            u.phone,
+            u.area,
+            f.file_path as filePath,
+            o.org_code as orgCode,
+            o.org_name as orgName,
+            u.balance,
+            u.status,
+            u.create_time as createTime,
+            u.update_time as updateTime,
+         from tb_user u
+         left join tb_role r on u.role_id = r.id
+         left join tb_org o on u.org_id = o.id
+         left join tb_file f on u.file_id = f.id
+         <where>
+             <if test=" user.name != null and user.name != '' ">
+                 and u.name like concat('%', #{user.name}, '%')
+             </if>
+             <if test=" user.sfzh != null and user.sfzh != '' ">
+                 and u.sfzh = #{user.sfzh}
+             </if>
+             <if test=" user.status != null and user.status != '' ">
+                 and u.status = #{user.status}
+             </if>
+             <if test=" user.phone != null and user.phone != '' ">
+                 and u.phone = #{user.phone}
+             </if>
+             <if test=" user.orgCode != null and user.orgCode != '' ">
+                 and u.org_code = #{user.orgCode}
+             </if>
+             <if test=" user.orgName != null and user.orgName!= '' ">
+                 and u.org_name = #{user.orgName}
+             </if>
+             <if test=" user.role != null and user.role!= '' ">
+                 and r.role = #{user.role}
+             </if>
+         </where>
+    </select>
+
+    <insert id="addUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
+        insert into tb_user (id,name,sfzh,nation,sex,birth,area,phone,create_time) values
+            (#{id},#{name},#{sfzh},#{nation},#{sex},#{birth},#{area},#{phone},#{createTime})
+    </insert>
+
+    <update id="updateUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
+        update tb_user set name = #{name},sfzh=#{sfzh},nation=#{nation},sex=#{sex},
+            birth=#{birth},area=#{area},phone=#{phone},create_time=#{createTime})
+        where id = #{id}
+    </update>
+
+    <update id="blackUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
+        update tb_user set status = '1' where id = #{id} and status = '0'
+    </update>
+
+    <update id="whiteUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
+        update tb_user set status = '0' where id = #{id} and status = '1'
+    </update>
+
+
+
+</mapper>
