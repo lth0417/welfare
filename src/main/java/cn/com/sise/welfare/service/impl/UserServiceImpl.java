@@ -40,6 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         //3.明文密码进行md5 + salt + hash散列
         Md5Hash MD5 = new Md5Hash(userSearchModel.getPassword(),salt,1024);
         userSearchModel.setPassword(MD5.toHex());
+        userSearchModel.setRoleId("3");
         UserEntity userEntity = new UserEntity();
         BeanUtil.copyProperties(userSearchModel,userEntity);
         int row = userMapper.insert(userEntity);

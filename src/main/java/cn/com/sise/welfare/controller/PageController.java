@@ -1,7 +1,9 @@
 package cn.com.sise.welfare.controller;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -10,6 +12,12 @@ public class PageController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @PostMapping("/logout")
+    public String logout(){
+        SecurityUtils.getSubject().logout();
+        return "redirect:/user/login";
     }
 
     @GetMapping("/admin")

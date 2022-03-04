@@ -48,23 +48,47 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body">
+                    <form class="layui-form" action="">
                     <div class="layui-form layui-form-pane">
                         <div class="layui-form-item">
-                            <div class="layui-inline layui-show-xs-block">
-                                <input type="text" id="goodsName" name="goodsName" placeholder="请输入商品名"
+                            <div class="layui-inline">
+                                <input type="text" id="name" name="name" placeholder="请输入姓名"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline" style="margin-left: -1px">
+                                <input type="text" id="sfzh" name="sfzh" placeholder="请输入身份证号码"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline" style="margin-left: -1px">
+                                <input type="text" id="phone" name="phone" placeholder="请输入联系方式"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline" style="margin-left: -1px">
+                                <input type="text" id="orgCode" name="orgCode" placeholder="请输入组织编号"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline" style="margin-left: -1px">
+                                <input type="text" id="orgName" name="orgName" placeholder="请输入组织名称"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline" style="margin-left: -1px">
+                                <input type="text" id="role" name="role" placeholder="请输入角色"
                                        autocomplete="off" class="layui-input">
                             </div>
 
-                            <div class="layui-inline layui-show-xs-block">
+                            <div class="layui-inline" style="margin-left: 9px">
                                 <button class="layui-btn" lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i>
                                 </button>
+                                <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></button>
                             </div>
                         </div>
+
                     </div>
                     <div>
                         <!--<table class="layui-table"></table>-->
                         <table class="layui-hide" id="test" lay-filter="test"></table>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -81,13 +105,25 @@
 
 <script th:src="@{/lib/layui/layui.all.js}" charset="utf-8"></script>
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table', "form", 'element', 'layer'], function () {
+        const element = layui.element;
+        const table = layui.table;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.$
 
-        table.render({
+        const tableIns = table.render({
             elem: '#test',
             type: 'GET'
             ,url:'/user/userWhiteList'
+            , where: {
+                name: $('input[name="name"]').val(),
+                sfzh: $('input[name="sfzh"]').val(),
+                phone: $('input[name="phone"]').val(),
+                orgCode: $('input[name="orgCode"]').val(),
+                orgName: $('input[name="orgName"]').val(),
+                role: $('input[name="role"]').val(),
+            }
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
@@ -119,10 +155,21 @@
                     ,{field:'status', title:'账号状态', width:120}
                     ,{field:'createTime', title:'创建时间', width:120}
                     ,{field:'updateTime', title:'更新时间', width:120}
-                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:160}
                 ]
             ]
             ,page: true
+        });
+
+        //搜索重载
+        form.on('submit(search)', function (data) {
+            tableIns.reload({
+                where: data.field,
+                page: {
+                    curr: 1
+                }
+            });
+            return false;
         });
 
         //头工具栏事件

@@ -40,6 +40,8 @@ public class UserController {
         }
     }
 
+
+
     @PostMapping("/register")
     public ResultModel register(UserSearchModel userSearchModel){
        return ResultModel.ok(userService.register(userSearchModel));

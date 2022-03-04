@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>后台登录-X-admin2.2</title>
@@ -33,15 +33,15 @@
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;"><span shiro:principal property="account"></span></a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
                     <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
                 <dd>
-                    <a th:href="@{/login}">切换帐号</a></dd>
+                    <a th:href="@{/logout}">切换帐号</a></dd>
                 <dd>
-                    <a th:href="@{/login}">退出</a></dd>
+                    <a th:href="@{/logout}">退出</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index">
