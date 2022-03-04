@@ -32,4 +32,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
         return roleMapper.updateRoleInfo(roleSearchModel);
     }
 
+    @Override
+    public int deleteRole(String id) {
+        return roleMapper.deleteById(id);
+    }
+
 }

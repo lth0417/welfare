@@ -12,4 +12,6 @@ public interface RoleService extends IService<RoleEntity> {
     RoleEntity addRole(RoleSearchModel roleSearchModel);
 
     RoleEntity updateRole(RoleSearchModel roleSearchModel);
+
+    int deleteRole(String id);
 }
