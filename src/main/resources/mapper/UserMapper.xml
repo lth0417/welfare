@@ -53,23 +53,18 @@
          </where>
     </select>
 
-    <insert id="addUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
-        insert into tb_user (id,name,sfzh,nation,sex,birth,area,phone,create_time) values
-            (#{id},#{name},#{sfzh},#{nation},#{sex},#{birth},#{area},#{phone},#{createTime})
-    </insert>
-
-    <update id="updateUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
-        update tb_user set name = #{name},sfzh=#{sfzh},nation=#{nation},sex=#{sex},
-            birth=#{birth},area=#{area},phone=#{phone},create_time=#{createTime})
-        where id = #{id}
-    </update>
-
     <update id="blackUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
         update tb_user set status = '1' where id = #{id} and status = '0'
     </update>
 
     <update id="whiteUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
         update tb_user set status = '0' where id = #{id} and status = '1'
+    </update>
+
+    <update id="updateUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
+        update tb_user set name = #{name},sfzh=#{sfzh},nation=#{nation},sex=#{sex},
+            birth=#{birth},area=#{area},phone=#{phone},create_time=#{createTime})
+        where id = #{id}
     </update>
 
 

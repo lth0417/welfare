@@ -35,8 +35,24 @@ public class UserController {
         }
     }
 
+    @PostMapping("/register")
+    public ResultModel register(UserSearchModel userSearchModel){
+       return ResultModel.ok(userService.register(userSearchModel));
+    }
+
     @PostMapping("/userList")
     public ResultModel selectUserList(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.selectUserInfo(userSearchModel));
     }
+
+    @PostMapping("/blackUser")
+    public ResultModel blackUserChange(UserSearchModel userSearchModel){
+        return ResultModel.ok(userService.blackUserChange(userSearchModel));
+    }
+
+    @PostMapping("/whiteUser")
+    public ResultModel whiteUserChange(UserSearchModel userSearchModel){
+        return ResultModel.ok(userService.whiteUserChange(userSearchModel));
+    }
+
 }

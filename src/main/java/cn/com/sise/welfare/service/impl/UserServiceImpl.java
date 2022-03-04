@@ -2,6 +2,7 @@ package cn.com.sise.welfare.service.impl;
 
 import cn.com.sise.welfare.entity.UserEntity;
 import cn.com.sise.welfare.mapper.UserMapper;
+import cn.com.sise.welfare.model.UserInfoModel;
 import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.UserService;
 import cn.com.sise.welfare.utils.SaltUtils;
@@ -21,11 +22,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
     @Autowired
     private UserMapper userMapper;
 
-    @Override
-    public IPage<UserEntity> selectUserInfo(UserSearchModel userSearchModel) {
-        return userMapper.selectUserList(userSearchModel);
-    }
-
+    //登录
     @Override
     public UserEntity login(String account) {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
@@ -33,8 +30,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         return userMapper.selectOne(queryWrapper);
     }
 
+    //注册
     @Override
-    public UserEntity insertUser(UserSearchModel userSearchModel) {
+    public UserEntity register(UserSearchModel userSearchModel) {
         //1.获取随机盐
         String salt = SaltUtils.getSalt(8);
         //2.将随机盐保存到数据
@@ -49,5 +47,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
             return userEntity;
         }
         return null;
+    }
+
+    //查看所有用户信息
+    @Override
+    public IPage<UserInfoModel> selectUserInfo(UserSearchModel userSearchModel) {
+        return userMapper.selectUserList(userSearchModel);
+    }
+
+    //黑名单
+    @Override
+    public UserEntity blackUserChange(UserSearchModel userSearchModel) {
+        return userMapper.blackUserChange(userSearchModel);
+    }
+
+    //白名单
+    @Override
+    public UserEntity whiteUserChange(UserSearchModel userSearchModel) {
+        return userMapper.whiteUserChange(userSearchModel);
+    }
+
+    //用户修改个人信息
+    @Override
+    public UserEntity updateUserBaseInfo(UserSearchModel userSearchModel) {
+        return userMapper.updateUserBaseInfo(userSearchModel);
     }
 }
