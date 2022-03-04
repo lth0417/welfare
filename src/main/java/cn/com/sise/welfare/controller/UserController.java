@@ -1,8 +1,10 @@
 package cn.com.sise.welfare.controller;
 
+import cn.com.sise.welfare.model.UserInfoModel;
 import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.UserService;
 import cn.com.sise.welfare.utils.ResultModel;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -45,12 +47,14 @@ public class UserController {
 
     @GetMapping("/userWhiteList")
     public ResultModel selectUserWhiteList(UserSearchModel userSearchModel){
-        return ResultModel.ok(userService.selectUserWhiteList(userSearchModel));
+        IPage<UserInfoModel> data = userService.selectUserWhiteList(userSearchModel);
+        return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
     @GetMapping("/userBlackList")
     public ResultModel selectUserBlackList(UserSearchModel userSearchModel){
-        return ResultModel.ok(userService.selectUserBlackList(userSearchModel));
+        IPage<UserInfoModel> data = userService.selectUserBlackList(userSearchModel);
+        return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
     @PostMapping("/blackUser")

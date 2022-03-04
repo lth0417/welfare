@@ -12,14 +12,16 @@ package cn.com.sise.welfare.utils;
  */
 public class ResultModel {
     // 响应业务状态
-    private Integer status;
+    private Integer code;
     // 响应消息
     private String msg;
     // 响应中的数据
     private Object data;
-    private String ok;  // 不使用
-    public static ResultModel build(Integer status, String msg, Object data) {
-        return new ResultModel(status, msg, data);
+
+    private Long count;
+
+    public static ResultModel build(Integer code, String msg, Object data) {
+        return new ResultModel(code, msg, data);
     }
     public static ResultModel ok(Object data) {
         return new ResultModel(data);
@@ -29,6 +31,9 @@ public class ResultModel {
     }
     public static ResultModel ok() {
         return new ResultModel(null);
+    }
+    public static ResultModel ok(Long count,Object data) {
+        return new ResultModel(0,"",data,count);
     }
     public static ResultModel errorMsg(String msg) {
         return new ResultModel(500, msg, null);
@@ -46,40 +51,52 @@ public class ResultModel {
 
     }
     public ResultModel(Integer status, String msg, Object data) {
-        this.status = status;
+        this.code = status;
         this.msg = msg;
         this.data = data;
     }
     public ResultModel(Object data) {
-        this.status = 200;
+        this.code = 200;
         this.msg = "OK";
         this.data = data;
     }
-    public Boolean isOK() {
-        return this.status == 200;
+
+    public ResultModel(Integer code, String msg, Object data, Long count) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.count = count;
     }
-    public Integer getStatus() {
-        return status;
+
+    public Integer getCode() {
+        return code;
     }
-    public void setStatus(Integer status) {
-        this.status = status;
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
+
     public String getMsg() {
         return msg;
     }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
     public Object getData() {
         return data;
     }
+
     public void setData(Object data) {
         this.data = data;
     }
-    public String getOk() {
-        return ok;
+
+    public Long getCount() {
+        return count;
     }
-    public void setOk(String ok) {
-        this.ok = ok;
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 }
