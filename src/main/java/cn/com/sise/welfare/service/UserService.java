@@ -9,7 +9,9 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserService extends IService<UserEntity> {
 
-    IPage<UserInfoModel> selectUserInfo(UserSearchModel userSearchModel);
+    IPage<UserInfoModel> selectUserWhiteList(UserSearchModel userSearchModel);
+
+    IPage<UserInfoModel> selectUserBlackList(UserSearchModel userSearchModel);
 
     UserEntity login(String account);
 

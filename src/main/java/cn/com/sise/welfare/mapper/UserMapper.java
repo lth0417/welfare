@@ -11,8 +11,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserMapper extends BaseMapper<UserEntity> {
 
-    //管理员查看用户信息
-    IPage<UserInfoModel> selectUserList(@Param("user") UserSearchModel userSearchModel);
+    //管理员查看白名单用户信息
+    IPage<UserInfoModel> selectUserWhiteList(@Param("user") UserSearchModel userSearchModel);
+
+    //管理员查看黑名单用户信息
+    IPage<UserInfoModel> selectUserBlackList(@Param("user") UserSearchModel userSearchModel);
 
     //管理员管理黑名单
     UserEntity blackUserChange(UserSearchModel userSearchModel);

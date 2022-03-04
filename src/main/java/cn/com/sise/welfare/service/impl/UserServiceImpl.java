@@ -49,10 +49,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         return null;
     }
 
-    //查看所有用户信息
+    //查看所有白名单用户信息
     @Override
-    public IPage<UserInfoModel> selectUserInfo(UserSearchModel userSearchModel) {
-        return userMapper.selectUserList(userSearchModel);
+    public IPage<UserInfoModel> selectUserWhiteList(UserSearchModel userSearchModel) {
+        return userMapper.selectUserWhiteList(userSearchModel);
+    }
+
+    //查看所有黑名单用户信息
+    @Override
+    public IPage<UserInfoModel> selectUserBlackList(UserSearchModel userSearchModel) {
+        return userMapper.selectUserBlackList(userSearchModel);
     }
 
     //黑名单
