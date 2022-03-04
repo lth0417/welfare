@@ -17,5 +17,9 @@ public class PageController {
         return "/backed/admin";
     }
 
+    @GetMapping("/register")
+    public String toRegister(){
+        return "/register";
+    }
 
 }

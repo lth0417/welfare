@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<form class="layui-form" th:action="@{/login}" th:method="post">
+<form class="layui-form" th:action="@{/register}" th:method="post">
     <div class="dowebok">
         <div class="logo"></div>
         <div class="form-item">
@@ -24,12 +24,9 @@
             <!--        <p class="tip">邮箱或密码不正确</p>-->
         </div>
         <div class="form-item">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo">注册</button>
         </div>
-        <div class="reg-bar">
-            <a class="reg" href="/register" target="_blank">立即注册</a>
-            <a class="forget" href="http://www.dowebok.com" target="_blank">忘记密码</a>
-        </div>
+
     </div>
 </form>
 <script src="./login/jquery.min.js"></script>
@@ -48,7 +45,7 @@
         //监听提交
         form.on('submit(formDemo)', function(data){
             $.ajax({
-                url:'/login',
+                url:'/register',
                 method:'POST',
                 data:data.field,
                 success:function (res) {
