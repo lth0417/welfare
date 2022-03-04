@@ -15,11 +15,7 @@ class WelfareApplicationTests {
 private UserService userService;
     @Test
     void contextLoads() {
-        UserSearchModel userSearchModel = new UserSearchModel();
-        userSearchModel.setAccount("admin");
-        userSearchModel.setPassword("123456");
-        userSearchModel.setRoleId("0");
-        userService.insertUser(userSearchModel);
+
     }
 
 }

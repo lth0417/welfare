@@ -22,4 +22,18 @@ public class PageController {
         return "/register";
     }
 
+    /**
+     * 跳转到白名单
+     * @return
+     */
+    @GetMapping("/toBlackList")
+    public String toBlackList(){
+        return "/backed/blackList";
+    }
+
+    @GetMapping("/toWhiteList")
+    public String toWhiteList(){
+        return "/backed/whiteList";
+    }
+
 }
