@@ -1,10 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--引入thymeleaf-->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
+    <title>从化农产品后台管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/xadmin.css}">
+    <!--<script type="text/javascript" th:src="@{/layui/layui.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/xadmin.js}" charset="UTF-8"></script>
 
+
+    <!--[if lt IE 9]>
+    <script th:src="@{https://cdn.staticfile.org/html5shiv/r29/html5.min.js}"></script>
+    <script th:src="@{https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+
+
+</head>
+
+<script type="text/html" id="toolbarDemo">
+    <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="recommend">推荐</a>
+</script>
+<body>
+<div class="x-nav">
+          <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">演示</a>
+            <a>
+              <cite>导航元素</cite></a>
+          </span>
+    <!--<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>-->
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form layui-form-pane">
+                        <div class="layui-form-item">
+                            <div class="layui-inline layui-show-xs-block">
+                                <input type="text" id="goodsName" name="goodsName" placeholder="请输入商品名"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+
+                            <div class="layui-inline layui-show-xs-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!--<table class="layui-table"></table>-->
+                        <table class="layui-hide" id="test" lay-filter="test"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script type="text/html" id="img">-->
+<!--    <div class="layer-photos-demo">-->
+<!--        <img th:layer-src="${filePath}+'{{d.picture}}'" th:src="${filePath}+'{{d.picture}}'" height="30" width="50"-->
+<!--             alt="{{d.picture}}"-->
+<!--             style="border: 1px solid #aaaaaa;cursor: pointer">-->
+<!--    </div>-->
+<!--</script>-->
+
+<script th:src="@{/lib/layui/layui.all.js}" charset="utf-8"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test',
+            type: 'GET'
+            ,url:'/user/userWhiteList'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '黑名单数据表'
+            ,cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{
+                    align: 'center', title: '序号', width: 80, templet: function (data) {
+                        return (data.LAY_TABLE_INDEX + 1);
+                    }
+                }
+                    ,{field:'account', title:'用户名', width:120, edit: 'text'}
+                    ,{field:'role', title:'角色', width:120, edit: 'text'}
+                    ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
+                    ,{field:'name', title:'姓名', width:100}
+                    ,{field:'sfzh', title:'身份证'}
+                    ,{field:'nation', title:'民族', width:80, sort: true}
+                    ,{field:'birth', title:'出生时间', width:120}
+                    ,{field:'phone', title:'联系电话', width:100, sort: true}
+                    ,{field:'area', title:'籍贯', width:120}
+                    ,{field:'filePath', title:'文件', width:120}
+                    ,{field:'orgCode', title:'组织编号', width:120}
+                    ,{field:'orgName', title:'组织名字', width:120}
+                    ,{field:'balance', title:'账户余额', width:120}
+                    ,{field:'status', title:'账号状态', width:120}
+                    ,{field:'createTime', title:'创建时间', width:120}
+                    ,{field:'updateTime', title:'更新时间', width:120}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
+            ]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

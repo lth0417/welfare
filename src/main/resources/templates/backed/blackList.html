@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Layui</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
@@ -27,7 +27,7 @@
 </script>
 
 
-<script src="/lib/layui/layui.all.js" charset="utf-8"></script>
+<script th:src="@{/lib/layui/layui.all.js}" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 
 <script>
@@ -35,31 +35,43 @@
         var table = layui.table;
 
         table.render({
-            elem: '#test'
-            ,url:'../../test/table/demo1.json.js'/*tpa=https://www.layuiweb.com/test/table/demo1.json*/
+            elem: '#test',
+            type: 'GET'
+            ,url:'/user/userBlackList'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
                 ,layEvent: 'LAYTABLE_TIPS'
                 ,icon: 'layui-icon-tips'
             }]
-            ,title: '用户数据表'
-            ,cols: [[
+            ,title: '黑名单数据表'
+            ,cols: [
+                [
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'username', title:'用户名', width:120, edit: 'text'}
-                ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
-                        return '<em>'+ res.email +'</em>'
-                    }}
+                ,{
+                    align: 'center', title: '序号', width: 80, templet: function (data) {
+                        return (data.LAY_TABLE_INDEX + 1);
+                    }
+                }
+                ,{field:'account', title:'用户名', width:120, edit: 'text'}
+                ,{field:'role', title:'角色', width:120, edit: 'text'}
                 ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-                ,{field:'city', title:'城市', width:100}
-                ,{field:'sign', title:'签名'}
-                ,{field:'experience', title:'积分', width:80, sort: true}
-                ,{field:'ip', title:'IP', width:120}
-                ,{field:'logins', title:'登入次数', width:100, sort: true}
-                ,{field:'joinTime', title:'加入时间', width:120}
+                ,{field:'name', title:'姓名', width:100}
+                ,{field:'sfzh', title:'身份证'}
+                ,{field:'nation', title:'民族', width:80, sort: true}
+                ,{field:'birth', title:'出生时间', width:120}
+                ,{field:'phone', title:'联系电话', width:100, sort: true}
+                ,{field:'area', title:'籍贯', width:120}
+                ,{field:'filePath', title:'文件', width:120}
+                ,{field:'orgCode', title:'组织编号', width:120}
+                ,{field:'orgName', title:'组织名字', width:120}
+                ,{field:'balance', title:'账户余额', width:120}
+                ,{field:'status', title:'账号状态', width:120}
+                ,{field:'createTime', title:'创建时间', width:120}
+                ,{field:'updateTime', title:'更新时间', width:120}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]]
+            ]
+            ]
             ,page: true
         });
 

@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,12 +43,12 @@ public class UserController {
        return ResultModel.ok(userService.register(userSearchModel));
     }
 
-    @PostMapping("/userWhiteList")
+    @GetMapping("/userWhiteList")
     public ResultModel selectUserWhiteList(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.selectUserWhiteList(userSearchModel));
     }
 
-    @PostMapping("/userBlackList")
+    @GetMapping("/userBlackList")
     public ResultModel selectUserBlackList(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.selectUserBlackList(userSearchModel));
     }

@@ -17,6 +17,7 @@ public class UserSearchModel extends Page<UserSearchModel> {
     private String area;
     private String roleId;
     private String role;
+    private String name;
     private String orgCode;
     private String orgName;
     private Double balance;

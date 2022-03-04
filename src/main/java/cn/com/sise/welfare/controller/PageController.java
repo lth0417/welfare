@@ -28,12 +28,12 @@ public class PageController {
      */
     @GetMapping("/toBlackList")
     public String toBlackList(){
-        return "/backed/blackList";
+        return "backed/blackList";
     }
 
     @GetMapping("/toWhiteList")
     public String toWhiteList(){
-        return "/backed/whiteList";
+        return "backed/whiteList";
     }
 
 }

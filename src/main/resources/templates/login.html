@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<form class="layui-form" th:action="@{/login}" th:method="post">
+<form class="layui-form" th:action="@{/user/login}" th:method="post">
     <div class="dowebok">
         <div class="logo"></div>
         <div class="form-item">
@@ -48,7 +48,7 @@
         //监听提交
         form.on('submit(formDemo)', function(data){
             $.ajax({
-                url:'/login',
+                url:'/user/login',
                 method:'POST',
                 data:data.field,
                 success:function (res) {
