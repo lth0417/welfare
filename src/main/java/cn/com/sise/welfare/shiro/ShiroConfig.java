@@ -22,10 +22,18 @@ public class ShiroConfig {
         //配置系统受限资源
         //配置系统公共资源
         Map<String, String> map = new HashMap<>();
+        map.put("/css/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/fonts/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/images/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/js/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/lib/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/login/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/login", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/user/login", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/user/login", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/user/register", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/register.jsp", "anon");//表示这个为公共资源 一定是在受限资源上面
-//        map.put("/**", "authc");//表示这个受限资源需要认证和授权
+        map.put("/**", "authc");//表示这个受限资源需要认证和授权
         // 设置认证界面路径
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);

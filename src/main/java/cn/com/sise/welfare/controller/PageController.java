@@ -14,10 +14,10 @@ public class PageController {
         return "login";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(){
         SecurityUtils.getSubject().logout();
-        return "redirect:/user/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/admin")

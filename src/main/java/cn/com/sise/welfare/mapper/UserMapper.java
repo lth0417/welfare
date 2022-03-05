@@ -20,13 +20,13 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     IPage<UserInfoModel> selectUserBlackList(@Param("user") UserSearchModel userSearchModel);
 
     //管理员管理黑名单
-    UserEntity blackUserChange(UserSearchModel userSearchModel);
+    int blackUserChange(UserSearchModel userSearchModel);
 
     //管理员批量管理黑名单
     int blackUserChangesList(String[] ids);
 
     //管理员管理白名单
-    UserEntity whiteUserChange(UserSearchModel userSearchModel);
+    int whiteUserChange(UserSearchModel userSearchModel);
 
     //管理员批量管理白名单
     int whiteUserChangesList(String[] ids);

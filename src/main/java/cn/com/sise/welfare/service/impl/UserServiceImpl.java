@@ -64,13 +64,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
 
     //黑名单
     @Override
-    public UserEntity blackUserChange(UserSearchModel userSearchModel) {
+    public int blackUserChange(UserSearchModel userSearchModel) {
         return userMapper.blackUserChange(userSearchModel);
     }
 
     //白名单
     @Override
-    public UserEntity whiteUserChange(UserSearchModel userSearchModel) {
+    public int whiteUserChange(UserSearchModel userSearchModel) {
         return userMapper.whiteUserChange(userSearchModel);
     }
 

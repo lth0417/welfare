@@ -9,10 +9,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -47,35 +44,55 @@ public class UserController {
        return ResultModel.ok(userService.register(userSearchModel));
     }
 
-    @PostMapping("/userWhiteList")
+    @GetMapping("/userWhiteList")
     public ResultModel selectUserWhiteList(UserSearchModel userSearchModel){
         IPage<UserInfoModel> data = userService.selectUserWhiteList(userSearchModel);
         return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
-    @PostMapping("/userBlackList")
+    @GetMapping("/userBlackList")
     public ResultModel selectUserBlackList(UserSearchModel userSearchModel){
         IPage<UserInfoModel> data = userService.selectUserBlackList(userSearchModel);
         return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
+    /**
+     * 拉进黑名单
+     * @param userSearchModel
+     * @return
+     */
     @PostMapping("/blackUser")
     public ResultModel blackUserChange(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.blackUserChange(userSearchModel));
     }
 
+    /**
+     * 移出黑名单
+     * @param userSearchModel
+     * @return
+     */
     @PostMapping("/whiteUser")
     public ResultModel whiteUserChange(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.whiteUserChange(userSearchModel));
     }
 
-    @PostMapping("/blackUsersList")
-    public ResultModel blackUserChangesList(String[] ids){
+    /**
+     * 批量拉进黑名单
+     * @param ids
+     * @return
+     */
+    @PostMapping("/blackUserChangesList")
+    public ResultModel blackUserChangesList(@RequestBody String[] ids){
         return ResultModel.ok(userService.blackUserChangesList(ids));
     }
 
-    @PostMapping("/whiteUsersList")
-    public ResultModel whiteUserChangesList(String[] ids){
+    /**
+     * 批量移出黑名单
+     * @param ids
+     * @return
+     */
+    @PostMapping("/whiteUserChangesList")
+    public ResultModel whiteUserChangesList(@RequestBody String[] ids){
         return ResultModel.ok(userService.whiteUserChangesList(ids));
     }
 
