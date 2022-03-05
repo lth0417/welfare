@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<form class="layui-form" th:action="@{/user/login}" th:method="post">
+<div class="layui-form">
     <div class="dowebok">
         <div class="logo"></div>
         <div class="form-item">
@@ -31,9 +31,9 @@
             <a class="forget" href="http://www.dowebok.com">忘记密码</a>
         </div>
     </div>
-</form>
-<script src="./login/jquery.min.js"></script>
-<script src="./lib/layui/layui.all.js"></script>
+</div>
+<script src="/login/jquery.min.js"></script>
+<script src="/lib/layui/layui.js"></script>
 <script>
     $(function () {
         $('input').val('')
@@ -62,7 +62,6 @@
                     }
                 }
             })
-
             return false;
         });
     });
