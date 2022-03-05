@@ -47,13 +47,13 @@ public class UserController {
        return ResultModel.ok(userService.register(userSearchModel));
     }
 
-    @GetMapping("/userWhiteList")
+    @PostMapping("/userWhiteList")
     public ResultModel selectUserWhiteList(UserSearchModel userSearchModel){
         IPage<UserInfoModel> data = userService.selectUserWhiteList(userSearchModel);
         return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
-    @GetMapping("/userBlackList")
+    @PostMapping("/userBlackList")
     public ResultModel selectUserBlackList(UserSearchModel userSearchModel){
         IPage<UserInfoModel> data = userService.selectUserBlackList(userSearchModel);
         return ResultModel.ok(data.getTotal(),data.getRecords());
@@ -67,6 +67,16 @@ public class UserController {
     @PostMapping("/whiteUser")
     public ResultModel whiteUserChange(UserSearchModel userSearchModel){
         return ResultModel.ok(userService.whiteUserChange(userSearchModel));
+    }
+
+    @PostMapping("/blackUsersList")
+    public ResultModel blackUserChangesList(String[] ids){
+        return ResultModel.ok(userService.blackUserChangesList(ids));
+    }
+
+    @PostMapping("/whiteUsersList")
+    public ResultModel whiteUserChangesList(String[] ids){
+        return ResultModel.ok(userService.whiteUserChangesList(ids));
     }
 
 }

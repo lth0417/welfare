@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper extends BaseMapper<UserEntity> {
 
@@ -20,8 +22,14 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     //管理员管理黑名单
     UserEntity blackUserChange(UserSearchModel userSearchModel);
 
+    //管理员批量管理黑名单
+    int blackUserChangesList(String[] ids);
+
     //管理员管理白名单
     UserEntity whiteUserChange(UserSearchModel userSearchModel);
+
+    //管理员批量管理白名单
+    int whiteUserChangesList(String[] ids);
 
     //用户修改个人信息
     UserEntity updateUserBaseInfo(UserSearchModel userSearchModel);

@@ -74,6 +74,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         return userMapper.whiteUserChange(userSearchModel);
     }
 
+    //批量黑名单
+    @Override
+    public int blackUserChangesList(String[] ids) {
+        return userMapper.blackUserChangesList(ids);
+    }
+
+    //批量白名单
+    @Override
+    public int whiteUserChangesList(String[] ids) {
+        return userMapper.whiteUserChangesList(ids);
+    }
+
     //用户修改个人信息
     @Override
     public UserEntity updateUserBaseInfo(UserSearchModel userSearchModel) {

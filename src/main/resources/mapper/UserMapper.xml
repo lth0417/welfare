@@ -100,11 +100,32 @@
     </select>
 
     <update id="blackUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
-        update tb_user set status = '1' where id = #{id} and status = '0'
+        update tb_user set status = '1' where id = #{id}
+    </update>
+
+    <update id="blackUserChangesList" parameterType="List">
+        update tb_user set status = '1' where id in
+            <foreach collection="array" item="ids" open="(" close=")" separator=",">
+                #{ids}
+            </foreach>
     </update>
 
     <update id="whiteUserChange" parameterType="cn.com.sise.welfare.model.UserSearchModel">
         update tb_user set status = '0' where id = #{id} and status = '1'
+    </update>
+
+    <update id="whiteUserChangesList" parameterType="List">
+        update tb_user set status = '0' where id in
+        <foreach collection="array" item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </update>
+
+    <update id="blackUserChangesList" parameterType="List">
+        update tb_user set status = '1' where id in
+        <foreach collection="ids" item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
     </update>
 
     <update id="updateUserBaseInfo" parameterType="cn.com.sise.welfare.model.UserSearchModel">
