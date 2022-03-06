@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.sise.welfare.mapper.ProjectMapper">
+
+    <select id="selectStayProjectList" parameterType="cn.com.sise.welfare.model.ProjectSearchModel"
+            resultType="cn.com.sise.welfare.model.ProjectInfoModel">
+        select
+            p.id,
+            p.title,
+            p.content,
+            p.resMoney,
+            p.nowMoney,
+            u.name,
+            u.sfzh,
+            u.phone,
+            o.linkman as checkUser,
+            o.org_code as orgCode,
+            o.org_name as rogName,
+            p.file_path as filePath,
+            p.status,
+            p.reason,
+            p.create_time as createTime,
+            p.update_time as updateTime
+        from tb_project p
+        left join tb_user u on p.user_id = u.id
+        left join tb_org o on u.org_id = o.id
+        <where>
+            status = '0'
+            <if test=" project.title != null and project.title != '' ">
+                and p.title like concat('%', #{project.title}, '%')
+            </if>
+            <if test=" project.name != null and project.name != '' ">
+                and u.name like concat('%', #{project.name}, '%')
+            </if>
+            <if test=" project.checkUser != null and project.checkUser != '' ">
+                and o.linkman like concat('%', #{project.checkUser}, '%')
+            </if>
+            <if test=" project.orgCode != null and project.orgCode != '' ">
+                and o.org_code = #{project.orgCode}
+            </if>
+            <if test=" project.orgName != null and project.orgName!= '' ">
+                and o.org_name = #{project.orgName}
+            </if>
+            <if test=" project.timeLeft != null and project.timeLeft!= '' ">
+                and p.create_time >= UNIX_TIMESTAMP(#{project.timeLeft},'YYYY-MM-DD HH:MM:SS')
+            </if>
+            <if test=" project.timeRight != null and project.timeRight!= '' ">
+                and p.create_time &lt;= UNIX_TIMESTAMP(#{project.timeRight},'YYYY-MM-DD HH:MM:SS')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPassProjectList" parameterType="cn.com.sise.welfare.model.ProjectSearchModel"
+            resultType="cn.com.sise.welfare.model.ProjectInfoModel">
+        select
+        p.id,
+        p.title,
+        p.content,
+        p.resMoney,
+        p.nowMoney,
+        u.name,
+        u.sfzh,
+        u.phone,
+        o.linkman as checkUser,
+        o.org_code as orgCode,
+        o.org_name as rogName,
+        p.file_path as filePath,
+        p.status,
+        p.reason,
+        p.create_time as createTime,
+        p.update_time as updateTime
+        from tb_project p
+        left join tb_user u on p.user_id = u.id
+        left join tb_org o on u.org_id = o.id
+        <where>
+            status = '1'
+            <if test=" project.title != null and project.title != '' ">
+                and p.title like concat('%', #{project.title}, '%')
+            </if>
+            <if test=" project.name != null and project.name != '' ">
+                and u.name like concat('%', #{project.name}, '%')
+            </if>
+            <if test=" project.checkUser != null and project.checkUser != '' ">
+                and o.linkman like concat('%', #{project.checkUser}, '%')
+            </if>
+            <if test=" project.orgCode != null and project.orgCode != '' ">
+                and o.org_code = #{project.orgCode}
+            </if>
+            <if test=" project.orgName != null and project.orgName!= '' ">
+                and o.org_name = #{project.orgName}
+            </if>
+            <if test=" project.timeLeft != null and project.timeLeft!= '' ">
+                and p.create_time >= UNIX_TIMESTAMP(#{project.timeLeft},'YYYY-MM-DD HH:MM:SS')
+            </if>
+            <if test=" project.timeRight != null and project.timeRight!= '' ">
+                and p.create_time &lt;= UNIX_TIMESTAMP(#{project.timeRight},'YYYY-MM-DD HH:MM:SS')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectNoPassProjectList" parameterType="cn.com.sise.welfare.model.ProjectSearchModel"
+            resultType="cn.com.sise.welfare.model.ProjectInfoModel">
+        select
+        p.id,
+        p.title,
+        p.content,
+        p.resMoney,
+        p.nowMoney,
+        u.name,
+        u.sfzh,
+        u.phone,
+        o.linkman as checkUser,
+        o.org_code as orgCode,
+        o.org_name as rogName,
+        p.file_path as filePath,
+        p.status,
+        p.reason,
+        p.create_time as createTime,
+        p.update_time as updateTime
+        from tb_project p
+        left join tb_user u on p.user_id = u.id
+        left join tb_org o on u.org_id = o.id
+        <where>
+            status = '2'
+            <if test=" project.title != null and project.title != '' ">
+                and p.title like concat('%', #{project.title}, '%')
+            </if>
+            <if test=" project.name != null and project.name != '' ">
+                and u.name like concat('%', #{project.name}, '%')
+            </if>
+            <if test=" project.checkUser != null and project.checkUser != '' ">
+                and o.linkman like concat('%', #{project.checkUser}, '%')
+            </if>
+            <if test=" project.orgCode != null and project.orgCode != '' ">
+                and o.org_code = #{project.orgCode}
+            </if>
+            <if test=" project.orgName != null and project.orgName!= '' ">
+                and o.org_name = #{project.orgName}
+            </if>
+            <if test=" project.timeLeft != null and project.timeLeft!= '' ">
+                and p.create_time >= UNIX_TIMESTAMP(#{project.timeLeft},'YYYY-MM-DD HH:MM:SS')
+            </if>
+            <if test=" project.timeRight != null and project.timeRight!= '' ">
+                and p.create_time &lt;= UNIX_TIMESTAMP(#{project.timeRight},'YYYY-MM-DD HH:MM:SS')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

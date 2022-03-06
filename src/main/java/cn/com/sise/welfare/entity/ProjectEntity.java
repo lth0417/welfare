@@ -12,14 +12,13 @@ public class ProjectEntity {
     private String id;
     private String title;
     private String content;
-    private String userId;
     private Double resMoney;
     private Double nowMoney;
-    private String fileId;
+    private String categoryId;
+    private String userId;
     private String status;
     private String checkUser;
-    private String checkStatus;
-    private String deleteFlag;
+    private String reason;
     private String createTime;
     private String updateTime;
 }
