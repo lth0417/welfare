@@ -20,7 +20,6 @@ public class UserEntity {
     private String birth;
     private String phone;
     private String area;
-    private String fileId;
     private String orgId;
     private Double balance;
     private String status;
