@@ -13,4 +13,6 @@ public class OrgSearchModel extends Page<OrgSearchModel> {
     private String phone;
     private String email;
     private String createTime;
+    private String status;
+    private String reason;
 }

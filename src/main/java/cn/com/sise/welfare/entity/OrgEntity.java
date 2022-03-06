@@ -17,4 +17,6 @@ public class OrgEntity {
     private String phone;
     private String email;
     private String createTime;
+    private String status;//0:待审核；1：通过；2：未通过
+    private String reason;
 }

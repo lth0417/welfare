@@ -9,9 +9,15 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface OrgMapper extends BaseMapper<OrgEntity> {
-    //管理员查看组织列表
-    IPage<OrgEntity> selectOrgList(@Param("org") OrgSearchModel orgSearchModel);
+    //查询通过审核组织
+    IPage<OrgEntity> selectPassOrgList(@Param("org") OrgSearchModel orgSearchModel);
 
-    //添加组织
+    //查询待审核组织
+    IPage<OrgEntity> selectStayOrgList(@Param("org") OrgSearchModel orgSearchModel);
+
+    //查询未通过审核组织
+    IPage<OrgEntity> selectNoPassOrgList(@Param("org") OrgSearchModel orgSearchModel);
+
+
 
 }

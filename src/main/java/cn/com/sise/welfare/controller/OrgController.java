@@ -20,14 +20,41 @@ public class OrgController {
     @Autowired
     private OrgService orgService;
 
-    @GetMapping("/selectOrgList")
-    public ResultModel selectOrgList(OrgSearchModel orgSearchModel){
-        IPage<OrgEntity> data = orgService.selectOrgList(orgSearchModel);
+    @GetMapping("/selectPassOrgList")
+    public ResultModel selectPassOrgList(OrgSearchModel orgSearchModel){
+        IPage<OrgEntity> data = orgService.selectPassOrgList(orgSearchModel);
         return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
+    @GetMapping("/selectStayOrgList")
+    public ResultModel selectStayOrgList(OrgSearchModel orgSearchModel){
+        IPage<OrgEntity> data = orgService.selectStayOrgList(orgSearchModel);
+        return ResultModel.ok(data.getTotal(),data.getRecords());
+    }
+
+    @GetMapping("/selectNoPassOrgList")
+    public ResultModel selectNoPassOrgList(OrgSearchModel orgSearchModel){
+        IPage<OrgEntity> data = orgService.selectNoPassOrgList(orgSearchModel);
+        return ResultModel.ok(data.getTotal(),data.getRecords());
+    }
+
+    //添加组织
     @PostMapping("/insertOrg")
     public ResultModel insertOrg(OrgEntity orgEntity){
         return ResultModel.ok(orgService.insertOrg(orgEntity));
     }
+
+    //删除组织
+    @PostMapping("/deleteOrg")
+    public ResultModel deleteOrg(String id){
+        return ResultModel.ok(orgService.deleteOrg(id));
+    }
+
+    //修改组织信息
+    @PostMapping("/updateOrg")
+    public ResultModel updateOrg(OrgEntity orgEntity){
+        return ResultModel.ok(orgService.updateOrg(orgEntity));
+    }
+
+
 }

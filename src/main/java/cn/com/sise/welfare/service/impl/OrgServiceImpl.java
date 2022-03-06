@@ -17,14 +17,35 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
     @Autowired
     private OrgMapper orgMapper;
 
+
     @Override
-    public IPage<OrgEntity> selectOrgList(OrgSearchModel orgSearchModel) {
-        return orgMapper.selectOrgList(orgSearchModel);
+    public IPage<OrgEntity> selectPassOrgList(OrgSearchModel orgSearchModel) {
+        return orgMapper.selectPassOrgList(orgSearchModel);
+    }
+
+    @Override
+    public IPage<OrgEntity> selectStayOrgList(OrgSearchModel orgSearchModel) {
+        return orgMapper.selectStayOrgList(orgSearchModel);
+    }
+
+    @Override
+    public IPage<OrgEntity> selectNoPassOrgList(OrgSearchModel orgSearchModel) {
+        return orgMapper.selectNoPassOrgList(orgSearchModel);
     }
 
     @Override
     public int insertOrg(OrgEntity orgEntity) {
         return orgMapper.insert(orgEntity);
+    }
+
+    @Override
+    public int deleteOrg(String id) {
+        return orgMapper.deleteById(id);
+    }
+
+    @Override
+    public int updateOrg(OrgEntity orgEntity) {
+        return orgMapper.updateById(orgEntity);
     }
 
 

@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.sise.welfare.mapper.OrgMapper">
 
-    <select id="selectOrgList" parameterType="cn.com.sise.welfare.model.OrgSearchModel"
+    <select id="selectPassOrgList" parameterType="cn.com.sise.welfare.model.OrgSearchModel"
             resultType="cn.com.sise.welfare.entity.OrgEntity">
         select
             id,
@@ -13,9 +13,71 @@
             linkman,
             phone,
             email,
-            create_time as createTime
+            create_time as createTime,
+            reason
         from tb_org
         <where>
+            status = '0'
+            <if test=" org.orgCode != null and org.orgCode != '' ">
+                and org_code like concat('%', #{org.orgCode}, '%')
+            </if>
+            <if test=" org.orgName != null and org.orgName != '' ">
+                and org_name like concat('%', #{org.orgName}, '%')
+            </if>
+            <if test=" linkman != null and linkman != '' ">
+                and linkman like concat('%', #{org.linkman}, '%')
+            </if>
+            <if test=" phone != null and phone != '' ">
+                and phone = #{org.phone}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectNoPassOrgList" parameterType="cn.com.sise.welfare.model.OrgSearchModel"
+            resultType="cn.com.sise.welfare.entity.OrgEntity">
+        select
+        id,
+        org_code as orgCode,
+        org_name as orgName,
+        address,
+        linkman,
+        phone,
+        email,
+        create_time as createTime,
+        reason
+        from tb_org
+        <where>
+            status = '2'
+            <if test=" org.orgCode != null and org.orgCode != '' ">
+                and org_code like concat('%', #{org.orgCode}, '%')
+            </if>
+            <if test=" org.orgName != null and org.orgName != '' ">
+                and org_name like concat('%', #{org.orgName}, '%')
+            </if>
+            <if test=" linkman != null and linkman != '' ">
+                and linkman like concat('%', #{org.linkman}, '%')
+            </if>
+            <if test=" phone != null and phone != '' ">
+                and phone = #{org.phone}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStayOrgList" parameterType="cn.com.sise.welfare.model.OrgSearchModel"
+            resultType="cn.com.sise.welfare.entity.OrgEntity">
+        select
+        id,
+        org_code as orgCode,
+        org_name as orgName,
+        address,
+        linkman,
+        phone,
+        email,
+        create_time as createTime,
+        reason
+        from tb_org
+        <where>
+            status = '1'
             <if test=" org.orgCode != null and org.orgCode != '' ">
                 and org_code like concat('%', #{org.orgCode}, '%')
             </if>
@@ -30,7 +92,6 @@
             </if>
         </where>
     </select>
-
 
 
 </mapper>
