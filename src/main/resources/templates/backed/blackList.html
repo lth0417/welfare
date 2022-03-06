@@ -24,7 +24,7 @@
 </head>
 
 <script type="text/html" id="toolbarDemo">
-    <button class="layui-btn layui-btn-sm" lay-event="delete">批量拉白</button>
+    <button class="layui-btn layui-btn-sm" lay-event="delete" onclick="return false;">批量移出黑名单</button>
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="del">移出黑名单</a>
@@ -162,6 +162,74 @@
             return false;
         });
 
+        //监听行工具事件
+        table.on('tool(test)',function (obj) {
+            const data=obj.data,
+                layEvent=obj.event;
+
+            if (layEvent==='del'){
+                layer.confirm('确定要拉其进黑名单吗?',function (index) {
+                    obj.del()
+                    layer.close(index);
+                    $.ajax({
+                        url: '/user/whiteUser?id='+data.id ,
+                        type:'POST',
+                        success:function (res) {
+                            if (res.code==200){
+                                layer.msg("操作成功!", {icon: 6});
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1000);
+                            }else {
+                                layer.msg("操作失败!",{icon:5})
+                            }
+                        }
+                    });
+                    return false;
+                });
+            }
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+
+            const checkStatus = table.checkStatus(obj.config.id);
+            let data = checkStatus.data;
+            console.log(JSON.stringify(data) )
+            let ids = [];
+            layui.each(data, (index, item) => {
+                ids.push(item.id);
+            });
+            switch (obj.event) {
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg('请选择数据', {icon: 2, anim: 6});
+                        return;
+                    }
+                    layer.confirm('确定进行批量移出黑名单操作吗？', {icon: 3, closeBtn: 0}, function (index) {
+                        $.ajax({
+                            url: '/user/whiteUserChangesList',
+                            type: 'POST',
+                            data: JSON.stringify(ids),
+                            // data:{courseIds:courseIds.toString()},
+                            contentType: "application/json;charset=UTF-8",
+                            success: function (res) {
+                                if (res.code==200) {
+                                    layer.msg("操作成功", {icon: 6});
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
+                                }
+                            },
+                            error: function () {
+                                layer.msg("操作失败", {icon: 2})
+                            }
+                        });
+                        return false;
+                    })
+                    break;
+            }
+        });
 
     });
 </script>

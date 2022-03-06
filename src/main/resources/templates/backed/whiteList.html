@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
     <title>从化农产品后台管理</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/layui2.6/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/font.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/xadmin.css}">
     <!--<script type="text/javascript" th:src="@{/layui/layui.js}"></script>-->
@@ -24,7 +24,7 @@
 </head>
 
 <script type="text/html" id="toolbarDemo">
-    <button class="layui-btn layui-btn-sm" lay-event="delete">批量拉黑</button>
+    <button class="layui-btn layui-btn-sm" lay-event="delete" onclick="return false;">批量拉黑</button>
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="del">拉进黑名单</a>
@@ -47,45 +47,45 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     <form class="layui-form" action="">
-                    <div class="layui-form layui-form-pane">
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <input type="text" id="name" name="name" placeholder="请输入姓名"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline" style="margin-left: -1px">
-                                <input type="text" id="sfzh" name="sfzh" placeholder="请输入身份证号码"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline" style="margin-left: -1px">
-                                <input type="text" id="phone" name="phone" placeholder="请输入联系方式"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline" style="margin-left: -1px">
-                                <input type="text" id="orgCode" name="orgCode" placeholder="请输入组织编号"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline" style="margin-left: -1px">
-                                <input type="text" id="orgName" name="orgName" placeholder="请输入组织名称"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline" style="margin-left: -1px">
-                                <input type="text" id="role" name="role" placeholder="请输入角色"
-                                       autocomplete="off" class="layui-input">
+                        <div class="layui-form layui-form-pane">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <input type="text" id="name" name="name" placeholder="请输入姓名"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="sfzh" name="sfzh" placeholder="请输入身份证号码"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="phone" name="phone" placeholder="请输入联系方式"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="orgCode" name="orgCode" placeholder="请输入组织编号"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="orgName" name="orgName" placeholder="请输入组织名称"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="role" name="role" placeholder="请输入角色"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+
+                                <div class="layui-inline" style="margin-left: 9px">
+                                    <button class="layui-btn" lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i>
+                                    </button>
+                                    <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></button>
+                                </div>
                             </div>
 
-                            <div class="layui-inline" style="margin-left: 9px">
-                                <button class="layui-btn" lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i>
-                                </button>
-                                <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></button>
-                            </div>
                         </div>
-
-                    </div>
-                    <div>
-                        <!--<table class="layui-table"></table>-->
-                        <table class="layui-hide" id="test" lay-filter="test"></table>
-                    </div>
+                        <div>
+                            <!--<table class="layui-table"></table>-->
+                            <table class="layui-hide" id="test" lay-filter="test"></table>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -93,15 +93,15 @@
     </div>
 </div>
 
-<!--<script type="text/html" id="img">-->
-<!--    <div class="layer-photos-demo">-->
-<!--        <img th:layer-src="${filePath}+'{{d.picture}}'" th:src="${filePath}+'{{d.picture}}'" height="30" width="50"-->
-<!--             alt="{{d.picture}}"-->
-<!--             style="border: 1px solid #aaaaaa;cursor: pointer">-->
-<!--    </div>-->
-<!--</script>-->
+<script type="text/html" id="img">
+    <div class="layer-photos-demo">
+        <img th:layer-src="${filePath}+'{{d.filePath}}'" th:src="${filePath}+'{{d.filePath}}'" height="30" width="50"
+             alt="{{d.filePath}}"
+             style="border: 1px solid #aaaaaa;cursor: pointer">
+    </div>
+</script>
 
-<script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
 <script>
     layui.use(['table', "form", 'element', 'layer'], function () {
         const element = layui.element;
@@ -109,22 +109,17 @@
         const form = layui.form;
         const layer = layui.layer;
         const $ = layui.$
-
         const tableIns = table.render({
             elem: '#test',
             type: 'GET'
-            , id: 'test'
             ,url:'/user/userWhiteList'
-            , where: {
-                name: $('input[name="name"]').val(),
-                sfzh: $('input[name="sfzh"]').val(),
-                phone: $('input[name="phone"]').val(),
-                orgCode: $('input[name="orgCode"]').val(),
-                orgName: $('input[name="orgName"]').val(),
-                role: $('input[name="role"]').val(),
-            }
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,title: '白名单数据表'
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '黑名单数据表'
             ,cols: [
                 [
                     {type: 'checkbox', fixed: 'left'}
@@ -133,23 +128,23 @@
                         return (data.LAY_TABLE_INDEX + 1);
                     }
                 }
-                    ,{field:'account', title:'用户名', width:120, edit: 'text'}
-                    ,{field:'role', title:'角色', width:120, edit: 'text'}
-                    ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-                    ,{field:'name', title:'姓名', width:100}
-                    ,{field:'sfzh', title:'身份证'}
-                    ,{field:'nation', title:'民族', width:80, sort: true}
-                    ,{field:'birth', title:'出生时间', width:120}
-                    ,{field:'phone', title:'联系电话', width:100, sort: true}
-                    ,{field:'area', title:'籍贯', width:120}
-                    ,{field:'filePath', title:'文件', width:120}
-                    ,{field:'orgCode', title:'组织编号', width:120}
-                    ,{field:'orgName', title:'组织名字', width:120}
-                    ,{field:'balance', title:'账户余额', width:120}
-                    ,{field:'status', title:'账号状态', width:120}
-                    ,{field:'createTime', title:'创建时间', width:120}
-                    ,{field:'updateTime', title:'更新时间', width:120}
-                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:100}
+                    ,{field:'account', title:'用户名', align: 'center', width:120, edit: 'text'}
+                    ,{field:'role', title:'角色', align: 'center', width:120, edit: 'text'}
+                    ,{field:'sex', title:'性别', align: 'center', width:80, edit: 'text', sort: true}
+                    ,{field:'name', title:'姓名', align: 'center', width:100}
+                    ,{field:'sfzh', title:'身份证', align: 'center'}
+                    ,{field:'nation', title:'民族', align: 'center', width:80, sort: true}
+                    ,{field:'birth', title:'出生时间', align: 'center', width:120}
+                    ,{field:'phone', title:'联系电话', align: 'center', width:100, sort: true}
+                    ,{field:'area', title:'籍贯', align: 'center', width:120}
+                    ,{field:'filePath', title:'文件', align: 'center', width:120, event: "pit", templet: "#img"}
+                    ,{field:'orgCode', title:'组织编号', align: 'center', width:120}
+                    ,{field:'orgName', title:'组织名字', align: 'center', align: 'center', width:120}
+                    ,{field:'balance', title:'账户余额', align: 'center', width:120}
+                    ,{field:'status', title:'账号状态', align: 'center', width:120}
+                    ,{field:'createTime', title:'创建时间', align: 'center', width:120}
+                    ,{field:'updateTime', title:'更新时间', align: 'center', width:120}
+                    ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:100}
                 ]
             ]
             ,page: true
@@ -166,17 +161,17 @@
             return false;
         });
 
-        //监听行工具事件
+
+//监听行工具事件
         table.on('tool(test)',function (obj) {
             const data=obj.data,
                 layEvent=obj.event;
-
             if (layEvent==='del'){
                 layer.confirm('确定要拉其进黑名单吗?',function (index) {
                     obj.del()
                     layer.close(index);
                     $.ajax({
-                        url: '/user/blackUser?id='+data.id ,
+                        url: '/user/whiteUser?id='+data.id ,
                         type:'POST',
                         success:function (res) {
                             if (res.code==200){
@@ -191,7 +186,13 @@
                     });
                     return false;
                 });
+            }else if (obj.event === 'pit') {
+                layer.photos({
+                    photos: '.layer-photos-demo'
+                    , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                });
             }
+
         });
 
 
@@ -200,6 +201,7 @@
 
             const checkStatus = table.checkStatus(obj.config.id);
             let data = checkStatus.data;
+            console.log(data)
             let ids = [];
             layui.each(data, (index, item) => {
                 ids.push(item.id);
@@ -210,15 +212,15 @@
                         layer.msg('请选择数据', {icon: 2, anim: 6});
                         return;
                     }
-                    layer.confirm('确定进行批量拉进黑名单操作吗', {icon: 3, closeBtn: 0}, function (index) {
+                    layer.confirm('确定进行批量拉黑操作吗？', {icon: 3, closeBtn: 0}, function (index) {
                         $.ajax({
                             url: '/user/blackUserChangesList',
                             type: 'POST',
                             data: JSON.stringify(ids),
                             contentType: "application/json;charset=UTF-8",
                             success: function (res) {
-                                console.log(res)
-                                if (res.code==200) {
+                                console.log(JSON.stringify(res) )
+                                if (res) {
                                     layer.msg("操作成功", {icon: 6});
                                     setTimeout(function () {
                                         location.reload();
@@ -226,12 +228,11 @@
                                 }
                             },
                             error: function () {
-                                console.log('111111')
                                 layer.msg("操作失败", {icon: 2})
                             }
                         });
-                    });
-                    console.log('abc')
+                        return false;
+                    })
                     break;
             }
         });

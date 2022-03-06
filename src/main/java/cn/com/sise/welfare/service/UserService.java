@@ -24,10 +24,10 @@ public interface UserService extends IService<UserEntity> {
     int whiteUserChange(UserSearchModel userSearchModel);
 
     //管理员批量管理黑名单
-    int blackUserChangesList(String[] ids);
+    int blackUserChangesList(String[] id);
 
     //管理员批量管理白名单
-    int whiteUserChangesList(String[] ids);
+    int whiteUserChangesList(String[] id);
 
     //用户修改个人信息
     UserEntity updateUserBaseInfo(UserSearchModel userSearchModel);
