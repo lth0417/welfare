@@ -61,5 +61,11 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
         return orgMapper.updateById(orgEntity);
     }
 
+    @Override
+    public int passOrgList(String[] id) {
+        return orgMapper.passOrgList(id);
+    }
+
+
 
 }

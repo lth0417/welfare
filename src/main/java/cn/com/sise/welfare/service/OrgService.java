@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 
 public interface OrgService extends IService<OrgEntity> {
     //查询通过审核组织
@@ -31,4 +34,9 @@ public interface OrgService extends IService<OrgEntity> {
 
     //不通过审核
     int updateNoPassOrg(OrgEntity orgEntity);
+
+    //批量通过
+    int passOrgList(String[] id);
+
+
 }

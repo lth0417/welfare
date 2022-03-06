@@ -18,6 +18,8 @@ public interface OrgMapper extends BaseMapper<OrgEntity> {
     //查询未通过审核组织
     IPage<OrgEntity> selectNoPassOrgList(@Param("org") OrgSearchModel orgSearchModel);
 
+    //批量通过审核
+    int passOrgList(String[] id);
 
 
 }

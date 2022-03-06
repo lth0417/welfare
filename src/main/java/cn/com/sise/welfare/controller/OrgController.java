@@ -9,10 +9,7 @@ import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/org")
@@ -63,11 +60,11 @@ public class OrgController {
         return ResultModel.ok(orgService.updateNoPassOrg(orgEntity));
     }
 
-
-
-
-
-
+    //批量通过审核
+    @PostMapping("/passOrgList")
+    public ResultModel passOrgList(@RequestBody String[] id){
+        return ResultModel.ok(orgService.passOrgList(id));
+    }
 
     //用户修改组织信息
     @PostMapping("/updateOrg")
