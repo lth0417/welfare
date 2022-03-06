@@ -82,9 +82,20 @@ public class PageController {
         return "/backed/admin/whiteList";
     }
 
-    //跳转到组织管理列表
+    //跳转到组织待审核列表
     @GetMapping("/toAuditList")
     public String toAuditList(){
         return "/backed/admin/toAuditList";
+    }
+
+    //跳转到组织通过审核列表
+    @GetMapping("/toApprovedList")
+    public String toApprovedList(){
+        return "/backed/admin/approvedOrganizationsList";
+    }
+    //跳转到组织没通过审核列表
+    @GetMapping("/toFailedList")
+    public String toFailedList(){
+        return "/backed/admin/failedOrganizationsList";
     }
 }

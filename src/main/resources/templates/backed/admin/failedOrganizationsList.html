@@ -23,14 +23,6 @@
 
 </head>
 
-<script type="text/html" id="toolbarDemo">
-    <button class="layui-btn layui-btn-sm" lay-event="pass" onclick="return false;">通过</button>
-    <button class="layui-btn layui-btn-sm" lay-event="noPass" onclick="return false;">不通过</button>
-</script>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="noPass">不通过</a>
-</script>
 <body>
 <div class="x-nav">
           <span class="layui-breadcrumb">
@@ -107,7 +99,7 @@
         const tableIns = table.render({
             elem: '#test',
             type: 'GET'
-            ,url:'/org/selectStayOrgList'
+            ,url:'/org/selectNoPassOrgList'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             , where: {
                 linkman: $('input[name="linkman"]').val(),
@@ -127,11 +119,11 @@
                     ,{field:'orgCode', title:'组织编号', align: 'center', width:120, edit: 'text'}
                     ,{field:'orgName', title:'组织名称', align: 'center', width:120, edit: 'text'}
                     ,{field:'address', title:'地址', align: 'center', width:80, edit: 'text', sort: true}
-                    ,{field:'linkman', title:'联系人', align: 'center', width:100}
-                    ,{field:'phone', title:'联系方式', align: 'center'}
+                    ,{field:'linkman', title:'联系人', align: 'center', width:60}
+                    ,{field:'phone', title:'联系方式', align: 'center', width:80}
                     ,{field:'email', title:'电子邮箱', align: 'center', width:80, sort: true}
+                    ,{field:'reason', title:'原因', align: 'center', width:80, sort: true}
                     ,{field:'createTime', title:'创建时间', align: 'center', width:120}
-                    ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:150}
                 ]
             ]
             ,page: true
@@ -153,8 +145,8 @@
         table.on('tool(test)',function (obj) {
             const data=obj.data,
                 layEvent=obj.event;
-            if (layEvent==='pass'){
-                layer.confirm('确定要通过审核吗?',function (index) {
+            if (layEvent==='del'){
+                layer.confirm('确定要拉其进黑名单吗?',function (index) {
                     obj.del()
                     layer.close(index);
                     $.ajax({
