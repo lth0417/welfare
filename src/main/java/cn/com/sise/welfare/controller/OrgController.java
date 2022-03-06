@@ -7,6 +7,7 @@ import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.OrgService;
 import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,25 @@ public class OrgController {
         return ResultModel.ok(orgService.deleteOrg(id));
     }
 
-    //修改组织信息
+   //审核组织通过
+   @PostMapping("/updatePassOrg")
+   public ResultModel updatePassOrg(OrgEntity orgEntity){
+       return ResultModel.ok(orgService.updatePassOrg(orgEntity));
+   }
+
+    //审核组织通过
+    @PostMapping("/updateNoPassOrg")
+    public ResultModel updateNoPassOrg(OrgEntity orgEntity){
+        return ResultModel.ok(orgService.updateNoPassOrg(orgEntity));
+    }
+
+
+
+
+
+
+
+    //用户修改组织信息
     @PostMapping("/updateOrg")
     public ResultModel updateOrg(OrgEntity orgEntity){
         return ResultModel.ok(orgService.updateOrg(orgEntity));

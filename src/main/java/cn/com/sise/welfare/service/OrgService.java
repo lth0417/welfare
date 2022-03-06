@@ -26,4 +26,9 @@ public interface OrgService extends IService<OrgEntity> {
     //修改组织信息
     int updateOrg(OrgEntity orgEntity);
 
+    //通过审核
+    int updatePassOrg(OrgEntity orgEntity);
+
+    //不通过审核
+    int updateNoPassOrg(OrgEntity orgEntity);
 }

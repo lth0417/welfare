@@ -48,5 +48,18 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
         return orgMapper.updateById(orgEntity);
     }
 
+    @Override
+    public int updatePassOrg(OrgEntity orgEntity) {
+        orgEntity.setStatus("1");
+        return orgMapper.updateById(orgEntity);
+    }
+
+    @Override
+    public int updateNoPassOrg(OrgEntity orgEntity) {
+        orgEntity.setStatus("2");
+        orgEntity.setReason(orgEntity.getReason());
+        return orgMapper.updateById(orgEntity);
+    }
+
 
 }
