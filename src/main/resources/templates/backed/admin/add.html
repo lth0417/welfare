@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--引入thymeleaf-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>从化农产品后台管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui2.6/css/layui.css}">
+</head>
+<style>
+    .layui-logo {
+        font-family: 华文行楷;
+    }
+</style>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-body"
+         style="left: auto; right: auto; display: flex; justify-content: center; align-items: center; width: 100%;">
+        <form th:action="@{/category/addCategoryInfo}"
+              class="layui-form layui-form-pane" th:method="post" style="margin-top:100px"
+              enctype="multipart/form-data">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">类别名称：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="cateName" value="" lay-verify="required"
+                           class="layui-input" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block"
+                     style="position: static; margin: auto;">
+                    <button type="submit" class="layui-btn layui-btn-fluid">添加</button>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block"
+                     style="position: static; margin: auto;">
+                    <button type="reset" class="layui-btn layui-btn-fluid">重置</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
+<script>
+    layui.use(['form', 'element'], function () {
+        const form = layui.form;
+        const element = layui.element;
+        const jQuery = layui.jquery;
+        const layer = layui.layer;
+
+
+        const $ = layui.$;
+        $("button[type='submit']").click(function () {
+            var st = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(st);
+            parent.window.location.href = "/category/toShowAllCategory";
+        })
+
+
+    });
+</script>
+</body>
+</html>

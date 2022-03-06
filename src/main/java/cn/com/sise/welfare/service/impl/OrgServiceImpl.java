@@ -66,6 +66,13 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
         return orgMapper.passOrgList(id);
     }
 
+    //禁用组织
+    @Override
+    public int updateBanOrg(OrgEntity orgEntity) {
+        orgEntity.setStatus("99");
+        orgEntity.setReason(orgEntity.getReason());
+        return orgMapper.updateById(orgEntity);
+    }
 
 
 }

@@ -13,6 +13,7 @@
             linkman,
             phone,
             email,
+            file_path as filePath,
             create_time as createTime,
             reason
         from tb_org
@@ -43,6 +44,7 @@
         linkman,
         phone,
         email,
+        file_path as filePath,
         create_time as createTime,
         reason
         from tb_org
@@ -73,6 +75,7 @@
         linkman,
         phone,
         email,
+        file_path as filePath,
         create_time as createTime,
         reason
         from tb_org

@@ -38,5 +38,8 @@ public interface OrgService extends IService<OrgEntity> {
     //批量通过
     int passOrgList(String[] id);
 
+    //组织禁用
+    int updateBanOrg(OrgEntity orgEntity);
+
 
 }

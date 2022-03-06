@@ -39,6 +39,7 @@ public class OrgController {
     //添加组织
     @PostMapping("/insertOrg")
     public ResultModel insertOrg(OrgEntity orgEntity){
+
         return ResultModel.ok(orgService.insertOrg(orgEntity));
     }
 
@@ -58,6 +59,12 @@ public class OrgController {
     @PostMapping("/updateNoPassOrg")
     public ResultModel updateNoPassOrg(OrgEntity orgEntity){
         return ResultModel.ok(orgService.updateNoPassOrg(orgEntity));
+    }
+
+    //禁用组织
+    @PostMapping("/updateBanOrg")
+    public ResultModel updateBanOrg(OrgEntity orgEntity){
+        return ResultModel.ok(orgService.updateBanOrg(orgEntity));
     }
 
     //批量通过审核
