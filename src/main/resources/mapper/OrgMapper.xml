@@ -22,10 +22,10 @@
             <if test=" org.orgName != null and org.orgName != '' ">
                 and org_name like concat('%', #{org.orgName}, '%')
             </if>
-            <if test=" linkman != null and linkman != '' ">
+            <if test=" org.linkman != null and org.linkman != '' ">
                 and linkman like concat('%', #{org.linkman}, '%')
             </if>
-            <if test=" phone != null and phone != '' ">
+            <if test=" org.phone != null and org.phone != '' ">
                 and phone = #{org.phone}
             </if>
         </where>
