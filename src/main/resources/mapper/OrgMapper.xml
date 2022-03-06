@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.sise.welfare.mapper.OrgMapper">
+
+    <select id="selectOrgList" parameterType="cn.com.sise.welfare.model.OrgSearchModel"
+            resultType="cn.com.sise.welfare.entity.OrgEntity">
+        select
+            id,
+            org_code as orgCode,
+            org_name as orgName,
+            address,
+            linkman,
+            phone,
+            email,
+            create_time as createTime
+        from tb_org
+        <where>
+            <if test=" org.orgCode != null and org.orgCode != '' ">
+                and org_code like concat('%', #{org.orgCode}, '%')
+            </if>
+            <if test=" org.orgName != null and org.orgName != '' ">
+                and org_name like concat('%', #{org.orgName}, '%')
+            </if>
+            <if test=" linkman != null and linkman != '' ">
+                and linkman like concat('%', #{org.linkman}, '%')
+            </if>
+            <if test=" phone != null and phone != '' ">
+                and phone = #{org.phone}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>
