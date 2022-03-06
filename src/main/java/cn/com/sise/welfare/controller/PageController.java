@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -29,12 +28,17 @@ public class PageController {
 
     @GetMapping("/admin")
     public String toAdmin(){
-        return "/backed/admin";
+        return "/backed/admin/admin";
     }
 
     @GetMapping("/register")
     public String toRegister(){
         return "/register";
+    }
+
+    @GetMapping("/welcome")
+    public String toWelcome(){
+        return "/welcome";
     }
 
     /**
@@ -44,13 +48,13 @@ public class PageController {
     @GetMapping("/toBlackList")
     public String toBlackList(Model model) {
         model.addAttribute("filePath", path);
-        return "backed/blackList";
+        return "/backed/admin/blackList";
     }
 
     @GetMapping("/toWhiteList")
     public String toWhiteList(Model model) {
         model.addAttribute("filePath", path);
-        return "backed/whiteList";
+        return "/backed/admin/whiteList";
     }
 
 }

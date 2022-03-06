@@ -93,13 +93,13 @@
     </div>
 </div>
 
-<!--<script type="text/html" id="img">-->
-<!--    <div class="layer-photos-demo">-->
-<!--        <img th:layer-src="${filePath}+'{{d.picture}}'" th:src="${filePath}+'{{d.picture}}'" height="30" width="50"-->
-<!--             alt="{{d.picture}}"-->
-<!--             style="border: 1px solid #aaaaaa;cursor: pointer">-->
-<!--    </div>-->
-<!--</script>-->
+<script type="text/html" id="img">
+    <div class="layer-photos-demo">
+        <img th:layer-src="${filePath}+'{{d.filePath}}'" th:src="${filePath}+'{{d.filePath}}'" height="30" width="50"
+             alt="{{d.filePath}}"
+             style="border: 1px solid #aaaaaa;cursor: pointer">
+    </div>
+</script>
 
 <script th:src="@{/lib/layui/layui.all.js}" charset="utf-8"></script>
 <script>
@@ -138,7 +138,7 @@
                     ,{field:'birth', title:'出生时间', width:120}
                     ,{field:'phone', title:'联系电话', width:100, sort: true}
                     ,{field:'area', title:'籍贯', width:120}
-                    ,{field:'filePath', title:'文件', width:120}
+                    ,{field:'filePath', title:'文件', align: 'center', width:120, event: "pit", templet: "#img"}
                     ,{field:'orgCode', title:'组织编号', width:120}
                     ,{field:'orgName', title:'组织名字', width:120}
                     ,{field:'balance', title:'账户余额', width:120}
@@ -186,6 +186,11 @@
                         }
                     });
                     return false;
+                });
+            }else if (obj.event === 'pit') {
+                layer.photos({
+                    photos: '.layer-photos-demo'
+                    , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
                 });
             }
         });
