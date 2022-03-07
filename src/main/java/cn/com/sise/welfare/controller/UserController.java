@@ -1,5 +1,6 @@
 package cn.com.sise.welfare.controller;
 
+import cn.com.sise.welfare.entity.UserEntity;
 import cn.com.sise.welfare.model.UserInfoModel;
 import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.UserService;
@@ -58,22 +59,22 @@ public class UserController {
 
     /**
      * 拉进黑名单
-     * @param userSearchModel
+     * @param userEntity
      * @return
      */
     @PostMapping("/blackUser")
-    public ResultModel blackUserChange(UserSearchModel userSearchModel){
-        return ResultModel.ok(userService.blackUserChange(userSearchModel));
+    public ResultModel blackUserChange(UserEntity userEntity){
+        return ResultModel.ok(userService.blackUserChange(userEntity));
     }
 
     /**
      * 移出黑名单
-     * @param userSearchModel
+     * @param userEntity
      * @return
      */
     @PostMapping("/whiteUser")
-    public ResultModel whiteUserChange(UserSearchModel userSearchModel){
-        return ResultModel.ok(userService.whiteUserChange(userSearchModel));
+    public ResultModel whiteUserChange(UserEntity userEntity){
+        return ResultModel.ok(userService.whiteUserChange(userEntity));
     }
 
     /**
@@ -94,6 +95,12 @@ public class UserController {
     @PostMapping("/whiteUserChangesList")
     public ResultModel whiteUserChangesList(@RequestBody String[] ids){
         return ResultModel.ok(userService.whiteUserChangesList(ids));
+    }
+
+    //用户修改个人信息
+    @PostMapping("/updateUserBaseInfo")
+    public ResultModel updateUserBaseInfo(UserEntity userEntity) {
+        return ResultModel.ok(userService.updateUserBaseInfo(userEntity));
     }
 
 }
