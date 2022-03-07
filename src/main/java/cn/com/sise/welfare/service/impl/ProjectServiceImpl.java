@@ -31,4 +31,32 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, ProjectEntity
     public IPage<ProjectInfoModel> selectNoPassProjectList(ProjectSearchModel projectSearchModel) {
         return projectMapper.selectNoPassProjectList(projectSearchModel);
     }
+
+    @Override
+    public int updatePassProject(ProjectEntity projectEntity) {
+        projectEntity.setStatus("1");
+        return projectMapper.updateById(projectEntity);
+    }
+
+    @Override
+    public int updateNoPassProject(ProjectEntity projectEntity) {
+        projectEntity.setStatus("2");
+        projectEntity.setReason(projectEntity.getReason());
+        return projectMapper.updateById(projectEntity);
+    }
+
+    @Override
+    public int addProjectInfo(ProjectEntity projectEntity) {
+        return projectMapper.insert(projectEntity);
+    }
+
+    @Override
+    public int updateProjectInfo(ProjectEntity projectEntity) {
+        return projectMapper.updateById(projectEntity);
+    }
+
+    @Override
+    public int deleteProjectInfo(String id) {
+        return projectMapper.deleteById(id);
+    }
 }

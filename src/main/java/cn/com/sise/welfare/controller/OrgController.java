@@ -55,7 +55,7 @@ public class OrgController {
        return ResultModel.ok(orgService.updatePassOrg(orgEntity));
    }
 
-    //审核组织通过
+    //审核组织不通过
     @PostMapping("/updateNoPassOrg")
     public ResultModel updateNoPassOrg(OrgEntity orgEntity){
         return ResultModel.ok(orgService.updateNoPassOrg(orgEntity));

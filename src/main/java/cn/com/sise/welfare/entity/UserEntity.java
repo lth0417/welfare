@@ -22,9 +22,9 @@ public class UserEntity {
     private String area;
     private String orgId;
     private Double balance;
+    private String filePath;
     private String status;
     private String createTime;
     private String updateTime;
     private String salt;
-
 }

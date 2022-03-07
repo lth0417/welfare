@@ -62,22 +62,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         return userMapper.selectUserBlackList(userSearchModel);
     }
 
-    //黑名单
-    @Override
-    public int blackUserChange(UserSearchModel userSearchModel) {
-        return userMapper.blackUserChange(userSearchModel);
-    }
-
     //白名单
     @Override
-    public int whiteUserChange(UserSearchModel userSearchModel) {
-        return userMapper.whiteUserChange(userSearchModel);
+    public int whiteUserChange(UserEntity userEntity) {
+        userEntity.setStatus("0");
+        return userMapper.updateById(userEntity);
     }
 
-    //批量黑名单
+    //黑名单
     @Override
-    public int blackUserChangesList(String[] id) {
-        return userMapper.blackUserChangesList(id);
+    public int blackUserChange(UserEntity userEntity) {
+        userEntity.setStatus("1");
+        return userMapper.updateById(userEntity);
     }
 
     //批量白名单
@@ -86,9 +82,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>implemen
         return userMapper.whiteUserChangesList(id);
     }
 
+    //批量黑名单
+    @Override
+    public int blackUserChangesList(String[] id) {
+        return userMapper.blackUserChangesList(id);
+    }
+
     //用户修改个人信息
     @Override
-    public UserEntity updateUserBaseInfo(UserSearchModel userSearchModel) {
-        return userMapper.updateUserBaseInfo(userSearchModel);
+    public int updateUserBaseInfo(UserEntity userEntity) {
+        return userMapper.updateById(userEntity);
     }
+
+
 }

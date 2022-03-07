@@ -15,11 +15,11 @@ public class UserInfoModel {
     private String birth;
     private String phone;
     private String area;
-    private String filePath;
     private String orgCode;
     private String orgName;
     private String balance;
     private String status;
+    private String filePath;
     private String createTime;
     private String updateTime;
 }
