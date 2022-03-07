@@ -72,7 +72,6 @@
                                     <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></button>
                                 </div>
                             </div>
-
                         </div>
                         <div>
                             <!--<table class="layui-table"></table>-->
@@ -92,6 +91,15 @@
 <!--             style="border: 1px solid #aaaaaa;cursor: pointer">-->
 <!--    </div>-->
 <!--</script>-->
+
+<script id="img" type="text/html">
+    {{# var srr=d.filePath.split(",");
+    for(var j in srr) { srr[j] }}
+    <div class="layer-photos-demo" style="margin:0 10px; display:inline-block !important; display:inline;  max-width:70px; max-height:50px;">
+        <img style=" max-width:70px; max-height:50px;" th:layer-src="${filePath}+'{{srr[j]}}'" th:src="${filePath}+'{{srr[j]}}'" />
+    </div>
+    {{# } }}
+</script>
 
 <script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
 <script>
@@ -113,6 +121,7 @@
                 orgName: $('input[name="orgName"]').val(),
             }
             ,title: '黑名单数据表'
+            , cellMinWidth: 80//全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,cols: [
                 [
                     {type: 'checkbox', fixed: 'left'}
@@ -121,17 +130,19 @@
                         return (data.LAY_TABLE_INDEX + 1);
                     }
                 }
-                    ,{field:'orgCode', title:'组织编号', align: 'center', width:120, edit: 'text'}
-                    ,{field:'orgName', title:'组织名称', align: 'center', width:120, edit: 'text'}
-                    ,{field:'address', title:'地址', align: 'center', width:80, edit: 'text', sort: true}
-                    ,{field:'linkman', title:'联系人', align: 'center', width:50}
-                    ,{field:'phone', title:'联系方式', align: 'center', width:80}
-                    ,{field:'email', title:'电子邮箱', align: 'center', width:80, sort: true}
-                    ,{field:'createTime', title:'创建时间', align: 'center', width:120}
-
+                    ,{field:'orgCode', title:'组织编号', align: 'center', edit: 'text'}
+                    ,{field:'orgName', title:'组织名称', align: 'center', edit: 'text'}
+                    ,{field:'filePath', title:'文件', align: 'center', width:100, templet: "#img", event: "pit"}
+                    ,{field:'address', title:'地址', align: 'center', edit: 'text'}
+                    ,{field:'linkman', title:'联系人', align: 'center'}
+                    ,{field:'phone', title:'联系方式', align: 'center'}
+                    ,{field:'email', title:'电子邮箱', align: 'center', sort: true}
+                    ,{field:'createTime', title:'创建时间', align: 'center'}
+                    ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:80}
                 ]
             ]
             ,page: true
+            , even: true
         });
 
         //搜索重载
@@ -218,7 +229,6 @@
                         return false;
                     })
                     break;
-
 
             }
         });

@@ -88,6 +88,15 @@
 <!--    </div>-->
 <!--</script>-->
 
+<script id="img" type="text/html">
+    {{# var srr=d.filePath.split(",");
+    for(var j in srr) { srr[j] }}
+    <div class="layer-photos-demo" style="margin:0 10px; display:inline-block !important; display:inline;  max-width:70px; max-height:50px;">
+        <img style=" max-width:70px; max-height:50px;" th:layer-src="${filePath}+'{{srr[j]}}'" th:src="${filePath}+'{{srr[j]}}'" />
+    </div>
+    {{# } }}
+</script>
+
 <script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
 <script>
     layui.use(['table', "form", 'element', 'layer'], function () {
@@ -118,6 +127,7 @@
                 }
                     ,{field:'orgCode', title:'组织编号', align: 'center', width:120, edit: 'text'}
                     ,{field:'orgName', title:'组织名称', align: 'center', width:120, edit: 'text'}
+                    ,{field:'filePath', title:'文件', align: 'center', width:100, templet: "#img", event: "pit"}
                     ,{field:'address', title:'地址', align: 'center', width:80, edit: 'text', sort: true}
                     ,{field:'linkman', title:'联系人', align: 'center', width:60}
                     ,{field:'phone', title:'联系方式', align: 'center', width:80}

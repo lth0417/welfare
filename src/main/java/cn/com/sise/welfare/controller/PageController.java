@@ -84,18 +84,21 @@ public class PageController {
 
     //跳转到组织待审核列表
     @GetMapping("/toAuditList")
-    public String toAuditList(){
+    public String toAuditList(Model model) {
+        model.addAttribute("filePath", path);
         return "/backed/admin/toAuditList";
     }
 
     //跳转到组织通过审核列表
     @GetMapping("/toApprovedList")
-    public String toApprovedList(){
+    public String toApprovedList(Model model) {
+        model.addAttribute("filePath", path);
         return "/backed/admin/approvedOrganizationsList";
     }
     //跳转到组织没通过审核列表
     @GetMapping("/toFailedList")
-    public String toFailedList(){
+    public String toFailedList(Model model) {
+        model.addAttribute("filePath", path);
         return "/backed/admin/failedOrganizationsList";
     }
 }

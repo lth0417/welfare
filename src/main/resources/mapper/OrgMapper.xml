@@ -18,7 +18,7 @@
             reason
         from tb_org
         <where>
-            status = '0'
+            status = '1'
             <if test=" org.orgCode != null and org.orgCode != '' ">
                 and org_code like concat('%', #{org.orgCode}, '%')
             </if>
@@ -80,7 +80,7 @@
         reason
         from tb_org
         <where>
-            status = '1'
+            status = '0'
             <if test=" org.orgCode != null and org.orgCode != '' ">
                 and org_code like concat('%', #{org.orgCode}, '%')
             </if>
