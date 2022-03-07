@@ -11,5 +11,4 @@ public class RoleEntity {
     @TableId(type = IdType.ASSIGN_UUID)
     private String id;
     private String role;
-    private String roleName;
 }

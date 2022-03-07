@@ -64,7 +64,8 @@ public class UserController {
      */
     @PostMapping("/blackUser")
     public ResultModel blackUserChange(UserEntity userEntity){
-        return ResultModel.ok(userService.blackUserChange(userEntity));
+        userEntity.setStatus("1");
+        return ResultModel.ok(userService.userStatusChange(userEntity));
     }
 
     /**
@@ -74,7 +75,8 @@ public class UserController {
      */
     @PostMapping("/whiteUser")
     public ResultModel whiteUserChange(UserEntity userEntity){
-        return ResultModel.ok(userService.whiteUserChange(userEntity));
+        userEntity.setStatus("0");
+        return ResultModel.ok(userService.userStatusChange(userEntity));
     }
 
     /**
