@@ -93,12 +93,13 @@
     </div>
 </div>
 
-<script type="text/html" id="img">
-    <div class="layer-photos-demo">
-        <img th:layer-src="${filePath}+'{{d.filePath}}'" th:src="${filePath}+'{{d.filePath}}'" height="30" width="50"
-             alt="{{d.filePath}}"
-             style="border: 1px solid #aaaaaa;cursor: pointer">
+<script id="img" type="text/html">
+    {{# var srr=d.filePath.split(",");
+    for(var j in srr) { srr[j] }}
+    <div class="layer-photos-demo" style="margin:0 10px; display:inline-block !important; display:inline;  max-width:70px; max-height:50px;">
+        <img style=" max-width:70px; max-height:50px;" th:layer-src="${filePath}+'{{srr[j]}}'" th:src="${filePath}+'{{srr[j]}}'" />
     </div>
+    {{# } }}
 </script>
 
 <script th:src="@{/lib/layui/layui.all.js}" charset="utf-8"></script>

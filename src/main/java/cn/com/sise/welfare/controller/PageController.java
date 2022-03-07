@@ -86,7 +86,7 @@ public class PageController {
     @GetMapping("/toAuditList")
     public String toAuditList(Model model) {
         model.addAttribute("filePath", path);
-        return "/backed/admin/toAuditList";
+        return "/backed/admin/toAuditOrganizationsList";
     }
 
     //跳转到组织通过审核列表

@@ -101,6 +101,11 @@
     {{# } }}
 </script>
 
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
+
 <script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
 <script>
     layui.use(['table', "form", 'element', 'layer'], function () {
@@ -137,6 +142,7 @@
                     ,{field:'linkman', title:'联系人', align: 'center'}
                     ,{field:'phone', title:'联系方式', align: 'center'}
                     ,{field:'email', title:'电子邮箱', align: 'center', sort: true}
+                    ,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}
                     ,{field:'createTime', title:'创建时间', align: 'center'}
                     ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:80}
                 ]
@@ -154,6 +160,11 @@
                 }
             });
             return false;
+        });
+
+        //监听锁定操作
+        form.on('checkbox(lockDemo)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
         });
 
 

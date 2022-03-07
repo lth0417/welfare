@@ -183,7 +183,7 @@
                     obj.del()
                     layer.close(index);
                     $.ajax({
-                        url: '/user/whiteUser?id='+data.id ,
+                        url: '/user/blackUser?id='+data.id ,
                         type:'POST',
                         success:function (res) {
                             if (res.code==200){
