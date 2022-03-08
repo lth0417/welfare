@@ -18,29 +18,62 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-body"
          style="left: auto; right: auto; display: flex; justify-content: center; align-items: center; width: 100%;">
-        <form th:action="@{/category/addCategoryInfo}"
+        <form th:action="@{/org/insertOrg}"
               class="layui-form layui-form-pane" th:method="post" style="margin-top:100px"
               enctype="multipart/form-data">
-
             <div class="layui-form-item">
-                <label class="layui-form-label">类别名称：</label>
+                <label class="layui-form-label">组织代码</label>
+                <div class="layui-input-block">
+                    <input name="orgCode" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">组织名称</label>
+                <div class="layui-input-block">
+                    <input name="orgName" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input name="address" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-block">
+                    <input name="linkman" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-block">
+                    <input name="phone" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input name="email" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="cateName" value="" lay-verify="required"
-                           class="layui-input" autocomplete="off">
+                    <input name="createTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
                 </div>
             </div>
-
-            <div class="layui-form-item">
-                <div class="layui-input-block"
-                     style="position: static; margin: auto;">
-                    <button type="submit" class="layui-btn layui-btn-fluid">添加</button>
+            <div style="margin-left: 100px">
+                <div class="form-group" style="display:inline-block;vertical-align: top;">
+                    <div class="input-group"><span class="input-group-addon">产品图组</span>
+                        <input type="file" name="files" value="请选择文件" webkitdirectory directory>
+                    </div>
                 </div>
             </div>
-
             <div class="layui-form-item">
-                <div class="layui-input-block"
-                     style="position: static; margin: auto;">
-                    <button type="reset" class="layui-btn layui-btn-fluid">重置</button>
+                <div class="layui-input-block">
+                    <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+                    <button class="layui-btn layui-btn-primary" type="reset">重置</button>
                 </div>
             </div>
 
@@ -61,8 +94,16 @@
         $("button[type='submit']").click(function () {
             var st = parent.layer.getFrameIndex(window.name);
             parent.layer.close(st);
-            parent.window.location.href = "/category/toShowAllCategory";
+            parent.window.location.href = "/toWhiteList";
         })
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
 
 
     });

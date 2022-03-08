@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service("orgService")
 @Transactional
@@ -34,7 +37,7 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
     }
 
     @Override
-    public int insertOrg(OrgEntity orgEntity) {
+    public int insertOrg(OrgEntity orgEntity){
         return orgMapper.insert(orgEntity);
     }
 

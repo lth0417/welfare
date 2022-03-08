@@ -101,4 +101,9 @@ public class PageController {
         model.addAttribute("filePath", path);
         return "/backed/admin/failedOrganizationsList";
     }
+
+    @GetMapping("/toAdd")
+    public String toAdd(){
+        return "/backed/admin/add";
+    }
 }
