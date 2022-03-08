@@ -17,9 +17,6 @@ public interface UserService extends IService<UserEntity> {
 
     UserEntity register(UserSearchModel userSearchModel);
 
-    //管理员管理黑白名单
-    int userStatusChange(UserEntity userEntity);
-
     //管理员批量管理黑名单
     int blackUserChangesList(String[] id);
 

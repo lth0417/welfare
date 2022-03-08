@@ -22,8 +22,8 @@ public interface ProjectMapper extends BaseMapper<ProjectEntity> {
     //管理员查看所有不通过公益项目信息
     IPage<ProjectInfoModel> selectNoPassProjectList(@Param("project") ProjectSearchModel projectSearchModel);
 
-    //管理员查看所有待审核公益项目信息
-   // IPage<ProjectInfoModel> selectStopProjectList(@Param("project") ProjectSearchModel projectSearchModel);
+    //管理员查看所有发布公益项目信息
+    IPage<ProjectInfoModel> selectPublishProjectList(@Param("project") ProjectSearchModel projectSearchModel);
 
 
 }

@@ -33,16 +33,8 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, ProjectEntity
     }
 
     @Override
-    public int updatePassProject(ProjectEntity projectEntity) {
-        projectEntity.setStatus("1");
-        return projectMapper.updateById(projectEntity);
-    }
-
-    @Override
-    public int updateNoPassProject(ProjectEntity projectEntity) {
-        projectEntity.setStatus("2");
-        projectEntity.setReason(projectEntity.getReason());
-        return projectMapper.updateById(projectEntity);
+    public IPage<ProjectInfoModel> selectPubilishProjectList(ProjectSearchModel projectSearchModel) {
+        return  projectMapper.selectPublishProjectList(projectSearchModel);
     }
 
     @Override

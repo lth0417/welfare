@@ -40,16 +40,33 @@ public class ProjectController {
         return ResultModel.ok(data.getTotal(),data.getRecords());
     }
 
+    //已发布列表
+    @GetMapping("/PublishProjectList")
+    public ResultModel selectPublishProjectList(ProjectSearchModel projectSearchModel) {
+        IPage<ProjectInfoModel> data = projectService.selectPubilishProjectList(projectSearchModel);
+        return ResultModel.ok(data.getTotal(),data.getRecords());
+    }
+
     //审核项目通过
     @PostMapping("/updatePassProject")
     public ResultModel updatePassProject(ProjectEntity projectEntity){
-        return ResultModel.ok(projectService.updatePassProject(projectEntity));
+        projectEntity.setStatus("1");
+        return ResultModel.ok(projectService.updateProjectInfo(projectEntity));
     }
 
     //审核项目不通过
     @PostMapping("/updateNoPassProject")
     public ResultModel updateNoPassProject(ProjectEntity projectEntity){
-        return ResultModel.ok(projectService.updateNoPassProject(projectEntity));
+        projectEntity.setStatus("2");
+        projectEntity.setReason(projectEntity.getReason());
+        return ResultModel.ok(projectService.updateProjectInfo(projectEntity));
+    }
+
+    //发布项目
+    @PostMapping("/updatePublishProject")
+    public ResultModel updatePublishProject(ProjectEntity projectEntity){
+        projectEntity.setStatus("3");
+        return ResultModel.ok(projectService.updateProjectInfo(projectEntity));
     }
 
     //用户修改项目信息
