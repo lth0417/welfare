@@ -27,101 +27,93 @@ public class OrgController {
 
     @Autowired
     private OrgService orgService;
+    @Value("${upload.file.path}")
+    private String filePath;
 
     @GetMapping("/selectPassOrgList")
-    public ResultModel selectPassOrgList(OrgSearchModel orgSearchModel){
+    public ResultModel selectPassOrgList(OrgSearchModel orgSearchModel) {
         IPage<OrgEntity> data = orgService.selectPassOrgList(orgSearchModel);
-        return ResultModel.ok(data.getTotal(),data.getRecords());
+        return ResultModel.ok(data.getTotal(), data.getRecords());
     }
 
     @GetMapping("/selectStayOrgList")
-    public ResultModel selectStayOrgList(OrgSearchModel orgSearchModel){
+    public ResultModel selectStayOrgList(OrgSearchModel orgSearchModel) {
         IPage<OrgEntity> data = orgService.selectStayOrgList(orgSearchModel);
-        return ResultModel.ok(data.getTotal(),data.getRecords());
+        return ResultModel.ok(data.getTotal(), data.getRecords());
     }
 
     @GetMapping("/selectNoPassOrgList")
-    public ResultModel selectNoPassOrgList(OrgSearchModel orgSearchModel){
+    public ResultModel selectNoPassOrgList(OrgSearchModel orgSearchModel) {
         IPage<OrgEntity> data = orgService.selectNoPassOrgList(orgSearchModel);
-        return ResultModel.ok(data.getTotal(),data.getRecords());
+        return ResultModel.ok(data.getTotal(), data.getRecords());
     }
 
-    @Value("${upload.file.path}")
-    private String filePath;
     //添加组织
-
-    @RequestMapping(value ="/insertOrg", method = RequestMethod.POST)
-    public ResultModel UploadFile(OrgEntity orgEntity,@RequestParam("file") MultipartFile[] file){
-        List list = new ArrayList();//存储生成的访问路径
-        String picname="";
-        if (file.length > 0) {
-            for (int i = 0; i < file.length; i++) {
-                MultipartFile uploadFile = file[i];
-                //设置上传文件的位置在该项目目录下的uploadFile文件夹下，并根据上传的文件日期，进行分类保存
-                //String realPath = filePath;
+    @RequestMapping(value = "/insertOrg", method = RequestMethod.POST)
+    public ResultModel UploadFile(OrgEntity orgEntity, @RequestParam("file") MultipartFile[] files) {
+        String picname = "";
+        if (files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
                 File folder = new File(filePath);
                 if (!folder.isDirectory()) {
                     folder.mkdirs();
                 }
-                String oldName = uploadFile.getOriginalFilename();
-                String suffixName=oldName.substring(oldName.lastIndexOf("."));//获取后缀名
-                String newName = CodeUtils.getImgName()+suffixName;
-                picname=picname+newName+",";
-                System.out.println("oldName = " + oldName);
-                System.out.println("newName = " + newName);
+                String oldName = file.getOriginalFilename();
+                String suffixName = oldName.substring(oldName.lastIndexOf("."));//获取后缀名
+                String newName = CodeUtils.getImgName() + suffixName;
+                picname = picname + newName + ",";
                 try {
                     //保存文件
-                    uploadFile.transferTo(new File(folder, newName));
+                    file.transferTo(new File(folder, newName));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            String imgName = picname.substring(0,picname.length() - 1);
+            String imgName = picname.substring(0, picname.length() - 1);
             orgEntity.setFilePath(imgName);
             orgEntity.setOrgCode(CodeUtils.getOrgCode());
             return ResultModel.ok(orgService.insertOrg(orgEntity));
-        } else if (file.length == 0) {
+        }else {
             return ResultModel.errorMsg("上传失败");
         }
-        return ResultModel.errorMsg("上传失败");
     }
 
     //删除组织
     @PostMapping("/deleteOrg")
-    public ResultModel deleteOrg(String id){
+    public ResultModel deleteOrg(String id) {
         return ResultModel.ok(orgService.deleteOrg(id));
     }
 
-   //审核组织通过
-   @PostMapping("/updatePassOrg")
-   public ResultModel updatePassOrg(OrgEntity orgEntity){
-       return ResultModel.ok(orgService.updatePassOrg(orgEntity));
-   }
+    //审核组织通过
+    @PostMapping("/updatePassOrg")
+    public ResultModel updatePassOrg(OrgEntity orgEntity) {
+        return ResultModel.ok(orgService.updatePassOrg(orgEntity));
+    }
 
     //审核组织不通过
     @PostMapping("/updateNoPassOrg")
-    public ResultModel updateNoPassOrg(OrgEntity orgEntity){
+    public ResultModel updateNoPassOrg(OrgEntity orgEntity) {
         return ResultModel.ok(orgService.updateNoPassOrg(orgEntity));
     }
 
     //禁用组织
     @PostMapping("/updateBanOrg")
-    public ResultModel updateBanOrg(OrgEntity orgEntity){
+    public ResultModel updateBanOrg(OrgEntity orgEntity) {
         return ResultModel.ok(orgService.updateBanOrg(orgEntity));
     }
 
     //批量通过审核
     @PostMapping("/passOrgList")
-    public ResultModel passOrgList(@RequestBody String[] id){
+    public ResultModel passOrgList(@RequestBody String[] id) {
         return ResultModel.ok(orgService.passOrgList(id));
     }
 
     //用户修改组织信息
     @PostMapping("/updateOrg")
-    public ResultModel updateOrg(OrgEntity orgEntity){
+    public ResultModel updateOrg(OrgEntity orgEntity) {
         return ResultModel.ok(orgService.updateOrg(orgEntity));
     }
-
 
 
 //    @PostMapping("/imgUpload")
