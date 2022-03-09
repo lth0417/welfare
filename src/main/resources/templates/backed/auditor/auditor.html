@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin2.2</title>
+    <title>众筹公益系统</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -27,7 +27,7 @@
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
-        <a href="admin.html">X-admin v2.2</a></div>
+        <a th:href="@{/admin}">众筹公益管理系统</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
@@ -56,19 +56,19 @@
         <ul id="nav">
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="用户管理">&#xe6b8;</i>
-                    <cite>用户管理</cite>
+                    <i class="iconfont left-nav-li" lay-tips="用户加入组织管理">&#xe6b8;</i>
+                    <cite>用户加入组织管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('白名单','/toWhiteList')">
+                        <a onclick="xadmin.add_tab('待审核','/toWhiteList')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>白名单</cite></a>
+                            <cite>待审核</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('黑名单','/toBlackList',true)">
+                        <a onclick="xadmin.add_tab('审核通过','/toBlackList',true)">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>黑名单</cite></a>
+                            <cite>审核通过</cite></a>
                     </li>
                 </ul>
             </li>
@@ -76,34 +76,6 @@
                 <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="公益项目管理">&#xe723;</i>
                     <cite>公益项目管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('待审核列表','order-list.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>待审核列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('待发布列表','order-list1.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>待发布列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('已发布列表列表','order-list1.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>已发布列表列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('回收站','order-list1.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>回收站</cite></a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="组织管理">&#xe723;</i>
-                    <cite>组织管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>

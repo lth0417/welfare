@@ -97,12 +97,14 @@
         </where>
     </select>
 
+
     <update id="blackUserChangesList" parameterType="List">
         update tb_user set status = '1' where id in
             <foreach collection="array" item="id" open="(" close=")" separator=",">
                 #{id}
             </foreach>
     </update>
+
 
     <update id="whiteUserChangesList" parameterType="List">
         update tb_user set status = '0' where id in

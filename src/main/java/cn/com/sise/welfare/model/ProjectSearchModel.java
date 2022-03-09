@@ -16,5 +16,5 @@ public class ProjectSearchModel extends Page<ProjectSearchModel> {
     private String orgCode;
     private String orgName;
     private String timeLeft;
-    private String timeReft;
+    private String timeRight;
 }

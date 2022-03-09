@@ -19,10 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/org")
@@ -51,35 +48,42 @@ public class OrgController {
 
     @Value("${upload.file.path}")
     private String filePath;
-    private static String picname="";
     //添加组织
 
     @RequestMapping(value ="/insertOrg", method = RequestMethod.POST)
-    public ResultModel UploadFile(HttpServletRequest request,OrgEntity orgEntity){
-        CommonsMultipartResolver cResolver = new CommonsMultipartResolver();
-        if (cResolver.isMultipart(request)) {
-            MultipartHttpServletRequest httpservletrequest = (MultipartHttpServletRequest) request;
-            List<MultipartFile> list = httpservletrequest.getFiles("files");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).getOriginalFilename());
-                System.out.println(list.get(i).getContentType());
-                picname=picname+","+list.get(i).getOriginalFilename();
+    public ResultModel UploadFile(OrgEntity orgEntity,@RequestParam("file") MultipartFile[] file){
+        List list = new ArrayList();//存储生成的访问路径
+        String picname="";
+        if (file.length > 0) {
+            for (int i = 0; i < file.length; i++) {
+                MultipartFile uploadFile = file[i];
+                //设置上传文件的位置在该项目目录下的uploadFile文件夹下，并根据上传的文件日期，进行分类保存
+                //String realPath = filePath;
+                File folder = new File(filePath);
+                if (!folder.isDirectory()) {
+                    folder.mkdirs();
+                }
+                String oldName = uploadFile.getOriginalFilename();
+                String suffixName=oldName.substring(oldName.lastIndexOf("."));//获取后缀名
+                String newName = CodeUtils.getImgName()+suffixName;
+                picname=picname+newName+",";
+                System.out.println("oldName = " + oldName);
+                System.out.println("newName = " + newName);
                 try {
-                    list.get(i).transferTo(new File(filePath+list.get(i).getOriginalFilename()+i));
-                    orgEntity.setFilePath(picname);
-                    return ResultModel.ok(orgService.insertOrg(orgEntity));
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                    //model.addAttribute("msg", "上传失败");
-                    return ResultModel.errorMsg("上传失败");
+                    //保存文件
+                    uploadFile.transferTo(new File(folder, newName));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    //model.addAttribute("msg", "上传失败");
-                    return ResultModel.errorMsg("上传失败");
                 }
             }
+            String imgName = picname.substring(0,picname.length() - 1);
+            orgEntity.setFilePath(imgName);
+            orgEntity.setOrgCode(CodeUtils.getOrgCode());
+            return ResultModel.ok(orgService.insertOrg(orgEntity));
+        } else if (file.length == 0) {
+            return ResultModel.errorMsg("上传失败");
         }
-        return ResultModel.ok();
+        return ResultModel.errorMsg("上传失败");
     }
 
     //删除组织
@@ -119,34 +123,35 @@ public class OrgController {
     }
 
 
-    @PostMapping("/imgUpload")
-    public Object multiUpload(@RequestParam("file") MultipartFile[] files, OrgEntity orgEntity) {
-        System.out.println("文件的个数:" + files.length);
-        String imgName = "";
-        for (MultipartFile file : files) {
-            if (file.isEmpty()) {
-                return "未选择文件";
-            }
-            //获取上传文件原来的名称
-            String oldName = file.getOriginalFilename();
-            // 获取文件的后缀名
-            String suffixName = oldName.substring(oldName.lastIndexOf("."));
-            String fileName = CodeUtils.getImgName()+suffixName;
-            File temp = new File(filePath,fileName);
-            if (!temp.exists()) {
-                temp.mkdirs();
-            }
-            imgName = imgName + fileName;
-            File localFile = new File(filePath + File.separator+ fileName);
-            try {
-                file.transferTo(localFile); //把上传的文件保存至本地
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "上传失败";
-            }
-        }
-        orgEntity.setFilePath(imgName);
-        return ResultModel.ok(orgService.insertOrg(orgEntity));
-    }
+
+//    @PostMapping("/imgUpload")
+//    public Object multiUpload(@RequestParam("file") MultipartFile[] files, OrgEntity orgEntity) {
+//        System.out.println("文件的个数:" + files.length);
+//        String imgName = "";
+//        for (MultipartFile file : files) {
+//            if (file.isEmpty()) {
+//                return "未选择文件";
+//            }
+//            //获取上传文件原来的名称
+//            String oldName = file.getOriginalFilename();
+//            // 获取文件的后缀名
+//            String suffixName = oldName.substring(oldName.lastIndexOf("."));
+//            String fileName = CodeUtils.getImgName()+suffixName;
+//            File temp = new File(filePath,fileName);
+//            if (!temp.exists()) {
+//                temp.mkdirs();
+//            }
+//            imgName = imgName + fileName;
+//            File localFile = new File(filePath + File.separator+ fileName);
+//            try {
+//                file.transferTo(localFile); //把上传的文件保存至本地
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "上传失败";
+//            }
+//        }
+//        orgEntity.setFilePath(imgName);
+//        return ResultModel.ok(orgService.insertOrg(orgEntity));
+//    }
 
 }

@@ -16,7 +16,7 @@
             u.phone,
             o.linkman as checkUser,
             o.org_code as orgCode,
-            o.org_name as rogName,
+            o.org_name as orgName,
             p.file_path as filePath,
             p.status,
             p.reason,

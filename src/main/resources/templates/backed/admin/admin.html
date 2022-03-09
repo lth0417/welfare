@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin2.2</title>
+    <title>众筹公益管理系统</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -27,7 +27,7 @@
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
-        <a href="admin.html">X-admin v2.2</a></div>
+        <a th:href="@{/admin}">众筹公益管理系统</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
@@ -84,19 +84,14 @@
                             <cite>待审核列表</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('待发布列表','order-list1.html')">
+                        <a onclick="xadmin.add_tab('待发布列表','/toBeReleasedList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>待发布列表</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('已发布列表列表','order-list1.html')">
+                        <a onclick="xadmin.add_tab('已发布列表列表','/toThePublishList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>已发布列表列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('回收站','order-list1.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>回收站</cite></a>
                     </li>
                 </ul>
             </li>
@@ -122,6 +117,32 @@
                             <cite>审核不通过列表</cite></a>
                     </li>
 
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="评论管理">&#xe723;</i>
+                    <cite>评论管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('评论查看列表','/toAuditList')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>评论查看列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="公告管理">&#xe723;</i>
+                    <cite>公告管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('公告查看列表','/toAuditList')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>公告查看列表</cite></a>
+                    </li>
                 </ul>
             </li>
         </ul>

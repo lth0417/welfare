@@ -24,10 +24,11 @@
 </head>
 
 <script type="text/html" id="toolbarDemo">
-    <button class="layui-btn layui-btn-sm" lay-event="delete" onclick="return false;">批量拉黑</button>
+    <button class="layui-btn layui-btn-sm" lay-event="pass" onclick="return false;">通过</button>
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="del">拉进黑名单</a>
+    <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="noPass">不通过</a>
 </script>
 <body>
 <div class="x-nav">
@@ -49,20 +50,21 @@
                     <form class="layui-form" action="">
                         <div class="layui-form layui-form-pane">
                             <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <input type="text" id="name" name="name" placeholder="请输入姓名"
+
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="title" name="title" placeholder="项目名称"
                                            autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline" style="margin-left: -1px">
-                                    <input type="text" id="sfzh" name="sfzh" placeholder="请输入身份证号码"
+                                    <input type="text" id="name" name="name" placeholder="申请人"
                                            autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline" style="margin-left: -1px">
-                                    <input type="text" id="phone" name="phone" placeholder="请输入联系方式"
+                                    <input type="text" id="checkUser" name="checkUser" placeholder="审核人"
                                            autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline" style="margin-left: -1px">
-                                    <input type="text" id="orgCode" name="orgCode" placeholder="请输入组织编号"
+                                    <input type="text" id="orgCode" name="orgCode" placeholder="组织编号"
                                            autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline" style="margin-left: -1px">
@@ -70,17 +72,18 @@
                                            autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline" style="margin-left: -1px">
-                                    <input type="text" id="role" name="role" placeholder="请输入角色"
+                                    <input type="text" id="timeLeft" name="timeLeft" placeholder="创建时间"
                                            autocomplete="off" class="layui-input">
                                 </div>
-
+                                <div class="layui-inline" style="margin-left: -1px">
+                                    <input type="text" id="timeRight" name="timeRight" placeholder="创建时间"
+                                           autocomplete="off" class="layui-input">
+                                </div>
                                 <div class="layui-inline" style="margin-left: 9px">
                                     <button class="layui-btn" lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i>
                                     </button>
                                     <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe669;</i></button>
                                 </div>
-                            </div>
-
                         </div>
                         <div>
                             <!--<table class="layui-table"></table>-->
@@ -100,6 +103,7 @@
 <!--             style="border: 1px solid #aaaaaa;cursor: pointer">-->
 <!--    </div>-->
 <!--</script>-->
+
 <script id="img" type="text/html">
     {{# var srr=d.filePath.split(",");
     for(var j in srr) { srr[j] }}
@@ -120,17 +124,19 @@
         const tableIns = table.render({
             elem: '#test',
             type: 'GET'
-            ,url:'/user/userWhiteList'
+            ,url:'/project/StayProjectList'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             , where: {
+                title: $('input[name="title"]').val(),
                 name: $('input[name="name"]').val(),
-                sfzh: $('input[name="sfzh"]').val(),
-                phone: $('input[name="phone"]').val(),
+                checkUser: $('input[name="checkUser"]').val(),
                 orgCode: $('input[name="orgCode"]').val(),
                 orgName: $('input[name="orgName"]').val(),
-                role: $('input[name="role"]').val()
+                timeLeft: $('input[name="timeLeft"]').val(),
+                timeRight: $('input[name="timeRight"]').val(),
             }
-            ,title: '白名单数据表'
+            ,title: '待发布的项目数据表'
+            , cellMinWidth: 80//全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,cols: [
                 [
                     {type: 'checkbox', fixed: 'left'}
@@ -139,23 +145,23 @@
                         return (data.LAY_TABLE_INDEX + 1);
                     }
                 }
-                    ,{field:'account', title:'用户名', align: 'center', width:120, edit: 'text'}
-                    ,{field:'role', title:'角色', align: 'center', width:120, edit: 'text'}
-                    ,{field:'sex', title:'性别', align: 'center', width:80, edit: 'text', sort: true}
-                    ,{field:'name', title:'姓名', align: 'center', width:100}
-                    ,{field:'sfzh', title:'身份证', align: 'center'}
-                    ,{field:'nation', title:'民族', align: 'center', width:80, sort: true}
-                    ,{field:'birth', title:'出生时间', align: 'center', width:120}
-                    ,{field:'phone', title:'联系电话', align: 'center', width:100, sort: true}
-                    ,{field:'area', title:'籍贯', align: 'center', width:120}
+                    ,{field:'title', title:'项目标题', align: 'center', edit: 'text'}
+                    ,{field:'content', title:'项目内容', align: 'center', edit: 'text'}
+                    ,{field:'resMoney', title:'项目金额', align: 'center'}
+                    ,{field:'nowMoney', title:'已有金额', align: 'center', edit: 'text'}
+                    ,{field:'name', title:'申请人', align: 'center'}
+                    ,{field:'sfzh', title:'身份证号码', align: 'center'}
+                    ,{field:'phone', title:'联系电话', align: 'center', sort: true}
+                    //,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}
+                    ,{field:'checkUser', title:'审核人', align: 'center'}
+                    ,{field:'orgCode', title:'组织编码', align: 'center'}
+                    ,{field:'orgName', title:'组织名', align: 'center'}
                     ,{field:'filePath', title:'文件', align: 'center', width:100, templet: "#img", event: "pit"}
-                    ,{field:'orgCode', title:'组织编号', align: 'center', width:120}
-                    ,{field:'orgName', title:'组织名字', align: 'center', width:120}
-                    ,{field:'balance', title:'账户余额', align: 'center', width:120}
-                    ,{field:'status', title:'账号状态', align: 'center', width:120}
-                    ,{field:'createTime', title:'创建时间', align: 'center', width:120}
-                    ,{field:'updateTime', title:'更新时间', align: 'center', width:120}
-                    ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:100}
+                    ,{field:'status', title:'状态', align: 'center'}
+                    ,{field:'reason', title:'未通过原因', align: 'center'}
+                    ,{field:'createTime', title:'创建时间', align: 'center'}
+                    ,{field:'updateTime', title:'更新时间', align: 'center'}
+                    ,{fixed: 'right', title:'操作', align: 'center', toolbar: '#barDemo', width:80}
                 ]
             ]
             ,page: true
@@ -178,12 +184,32 @@
         table.on('tool(test)',function (obj) {
             const data=obj.data,
                 layEvent=obj.event;
-            if (layEvent==='del'){
-                layer.confirm('确定要拉其进黑名单吗?',function (index) {
+            if (layEvent==='pass'){
+                layer.confirm('确定要通过审核吗?',function (index) {
                     obj.del()
                     layer.close(index);
                     $.ajax({
-                        url: '/user/blackUser?id='+data.id ,
+                        url: '/org/updatePassProject?id='+data.id ,
+                        type:'POST',
+                        success:function (res) {
+                            if (res.code==200){
+                                layer.msg("操作成功!", {icon: 6});
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1000);
+                            }else {
+                                layer.msg("操作失败!",{icon:5})
+                            }
+                        }
+                    });
+                    return false;
+                });
+            }else if (obj.event === 'noPass') {
+                layer.confirm('审核不通过吗?',function (index) {
+                    obj.del()
+                    layer.close(index);
+                    $.ajax({
+                        url: '/org/updateNoPassProject?id='+data.id ,
                         type:'POST',
                         success:function (res) {
                             if (res.code==200){
@@ -219,14 +245,14 @@
                 ids.push(item.id);
             });
             switch (obj.event) {
-                case 'delete':
+                case 'pass':
                     if (data.length === 0) {
                         layer.msg('请选择数据', {icon: 2, anim: 6});
                         return;
                     }
-                    layer.confirm('确定进行批量拉黑操作吗？', {icon: 3, closeBtn: 0}, function (index) {
+                    layer.confirm('确定进行批量通过审核操作吗？', {icon: 3, closeBtn: 0}, function (index) {
                         $.ajax({
-                            url: '/user/blackUserChangesList',
+                            url: '/org/passOrgList',
                             type: 'POST',
                             data: JSON.stringify(ids),
                             contentType: "application/json;charset=UTF-8",
@@ -246,6 +272,7 @@
                         return false;
                     })
                     break;
+
             }
         });
     });

@@ -62,7 +62,7 @@ public class PageController {
     }
 
     /**
-     * 跳转到黑名单
+     * 内容区显示用户管理的黑名单
      * @return
      */
     @GetMapping("/toBlackList")
@@ -72,7 +72,7 @@ public class PageController {
     }
 
     /**
-     * 跳转到白名单
+     * 内容区显示用户管理的白名单
      * @param model
      * @return
      */
@@ -82,20 +82,21 @@ public class PageController {
         return "/backed/admin/whiteList";
     }
 
-    //跳转到组织待审核列表
+    //内容区显示组织待审核列表数据
     @GetMapping("/toAuditList")
     public String toAuditList(Model model) {
         model.addAttribute("filePath", path);
         return "/backed/admin/toAuditOrganizationsList";
     }
 
-    //跳转到组织通过审核列表
+    //内容区显示组织通过审核列表数据
     @GetMapping("/toApprovedList")
     public String toApprovedList(Model model) {
         model.addAttribute("filePath", path);
         return "/backed/admin/approvedOrganizationsList";
     }
-    //跳转到组织没通过审核列表
+
+    //内容区显示组织没通过审核列表数据
     @GetMapping("/toFailedList")
     public String toFailedList(Model model) {
         model.addAttribute("filePath", path);
@@ -106,4 +107,21 @@ public class PageController {
     public String toAdd(){
         return "/backed/admin/add";
     }
+
+    //内容区显示项目待发布列表数据
+    @GetMapping("/toBeReleasedList")
+    public String toBeReleasedList(Model model) {
+        model.addAttribute("filePath", path);
+        return "/backed/admin/toBeReleasedList";
+    }
+
+    //内容区显示已发布的项目列表数据
+    @GetMapping("/toThePublishList")
+    public String toThePublishList(Model model) {
+        model.addAttribute("filePath", path);
+        return "/backed/admin/thePublishedList";
+    }
+
+
+
 }
