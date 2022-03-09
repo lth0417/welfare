@@ -1,10 +1,12 @@
 package cn.com.sise.welfare.controller;
 
 import cn.com.sise.welfare.entity.OrgEntity;
+import cn.com.sise.welfare.entity.UserEntity;
 import cn.com.sise.welfare.model.OrgSearchModel;
 import cn.com.sise.welfare.model.UserInfoModel;
 import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.OrgService;
+import cn.com.sise.welfare.utils.CodeUtils;
 import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
@@ -52,8 +54,6 @@ public class OrgController {
     private static String picname="";
     //添加组织
 
-
-
     @RequestMapping(value ="/insertOrg", method = RequestMethod.POST)
     public ResultModel UploadFile(HttpServletRequest request,OrgEntity orgEntity){
         CommonsMultipartResolver cResolver = new CommonsMultipartResolver();
@@ -81,76 +81,6 @@ public class OrgController {
         }
         return ResultModel.ok();
     }
-
-
-
-
-
-    /*@RequestMapping("/issue")
-    public ResultModel upload(OrgEntity orgEntity, MultipartFile[] file) throws IllegalStateException, IOException {
-        File dirPath = new File(filePath);
-        if (!dirPath.exists()) {
-            dirPath.mkdirs();
-        }
-        for (int i=0;i<file.length;i++){
-            picname=picname+","+file[i].getOriginalFilename();
-        }
-        orgEntity.setFilePath(picname);
-        return ResultModel.ok(orgService.insertOrg(orgEntity));
-    }*/
-    /*String o = "";
-        String n = "";
-        String pic = file[0].getOriginalFilename();
-        System.out.println(pic);*/
-    //Pic pic1 = new Pic();
-    /*try {
-     *//*for (int i = 0; i < file.length; i++) {
-                o = file[i].getOriginalFilename();
-                n = produce.getProducename();
-                file[i].transferTo(new File(filePath + n + i + ".jpg"));
-                String picname="/pic/"+n+i+".jpg";
-                pic1.setAddress(picname);
-                pic1.setProducename(produce.getProducename());
-                pic1.setCate(produce.getCate());
-                int rows = produceService.addPic(pic1);
-            }*//*
-            for (int i=0;i<file.length;i++){
-                picname=picname+file[i].getOriginalFilename();
-            }
-
-            *//*SecurityContext context = SecurityContextHolder.getContext();
-            Authentication authentication = context.getAuthentication();
-            UserDetails principal = (UserDetails) authentication.getPrincipal();
-            String userid = String.valueOf(principal.getUsername());
-
-            pic = "/pic/" + produce.getProducename() + "0.jpg";
-            System.out.println(pic);
-            Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            dateFormat.format(date);
-            Produce p = new Produce();
-
-            p.setProducename(produce.getProducename());
-            p.setStorename(produce.getStorename());
-            p.setPrice(produce.getPrice());
-            p.setIntroduce(produce.getIntroduce());
-            p.setPhone(produce.getPhone());
-            p.setAddress(produce.getAddress());
-            p.setPic(pic);
-            p.setCreatedate(date);
-            p.setIndate(produce.getIndate());
-            p.setCate(produce.getCate());
-            p.setWarning(produce.getWarning());
-            p.setMerchantId(userid);
-            p.setStatu("3");
-            p.setHeat(3);
-            int rows = produceService.issueProduce(p);
-            model.addAttribute("result", "上传成功！");*//*
-        } catch (IOException e) {
-            model.addAttribute("result", "添加失败！请稍后再尝试！");
-            e.printStackTrace();
-
-        }*/
 
     //删除组织
     @PostMapping("/deleteOrg")
@@ -188,5 +118,35 @@ public class OrgController {
         return ResultModel.ok(orgService.updateOrg(orgEntity));
     }
 
+
+    @PostMapping("/imgUpload")
+    public Object multiUpload(@RequestParam("file") MultipartFile[] files, OrgEntity orgEntity) {
+        System.out.println("文件的个数:" + files.length);
+        String imgName = "";
+        for (MultipartFile file : files) {
+            if (file.isEmpty()) {
+                return "未选择文件";
+            }
+            //获取上传文件原来的名称
+            String oldName = file.getOriginalFilename();
+            // 获取文件的后缀名
+            String suffixName = oldName.substring(oldName.lastIndexOf("."));
+            String fileName = CodeUtils.getImgName()+suffixName;
+            File temp = new File(filePath,fileName);
+            if (!temp.exists()) {
+                temp.mkdirs();
+            }
+            imgName = imgName + fileName;
+            File localFile = new File(filePath + File.separator+ fileName);
+            try {
+                file.transferTo(localFile); //把上传的文件保存至本地
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "上传失败";
+            }
+        }
+        orgEntity.setFilePath(imgName);
+        return ResultModel.ok(orgService.insertOrg(orgEntity));
+    }
 
 }

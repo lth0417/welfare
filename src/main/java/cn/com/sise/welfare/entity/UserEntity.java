@@ -21,6 +21,7 @@ public class UserEntity {
     private String phone;
     private String area;
     private String orgId;
+    private String orgStatus;//加入组织审核状态
     private Double balance;
     private String filePath;
     private String status;

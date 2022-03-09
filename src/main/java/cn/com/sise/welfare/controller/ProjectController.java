@@ -62,7 +62,7 @@ public class ProjectController {
         return ResultModel.ok(projectService.updateProjectInfo(projectEntity));
     }
 
-    //发布项目
+    //
     @PostMapping("/updatePublishProject")
     public ResultModel updatePublishProject(ProjectEntity projectEntity){
         projectEntity.setStatus("3");
