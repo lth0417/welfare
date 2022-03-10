@@ -39,7 +39,7 @@ public class UserController {
             }else if (subject.hasRole("auditor")){
                 return ResultModel.ok("/auditor");
             }else{
-                return ResultModel.ok("/user");
+                return ResultModel.ok("/main/user");
             }
         } catch (UnknownAccountException e) {
             return ResultModel.errorMsg("账户不存在");

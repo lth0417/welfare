@@ -31,6 +31,8 @@ public class ShiroConfig {
         map.put("/login", "anon");//表示这个为公共资源 一定是在受限资源上面
         map.put("/user/login", "anon");//表示这个为公共资源 一定是在受限资源上面
         map.put("/org/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/fronted/**", "anon");//表示这个为公共资源 一定是在受限资源上面
+        map.put("/main/**", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/user/login", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/user/register", "anon");//表示这个为公共资源 一定是在受限资源上面
 //        map.put("/register.jsp", "anon");//表示这个为公共资源 一定是在受限资源上面

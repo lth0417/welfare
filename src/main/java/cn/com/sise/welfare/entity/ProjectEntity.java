@@ -17,7 +17,6 @@ public class ProjectEntity {
     private String categoryId;
     private String userId;
     private String status;
-    private String checkUser;
     private String reason;
     private String createTime;
     private String updateTime;
