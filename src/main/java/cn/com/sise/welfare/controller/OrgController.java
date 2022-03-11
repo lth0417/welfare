@@ -50,33 +50,9 @@ public class OrgController {
 
     //添加组织
     @RequestMapping(value = "/insertOrg", method = RequestMethod.POST)
-    public ResultModel UploadFile(OrgEntity orgEntity, @RequestParam("file") MultipartFile[] files) {
-        String picname = "";
-        if (files.length > 0) {
-            for (int i = 0; i < files.length; i++) {
-                MultipartFile file = files[i];
-                File folder = new File(filePath);
-                if (!folder.isDirectory()) {
-                    folder.mkdirs();
-                }
-                String oldName = file.getOriginalFilename();
-                String suffixName = oldName.substring(oldName.lastIndexOf("."));//获取后缀名
-                String newName = CodeUtils.getImgName() + suffixName;
-                picname = picname + newName + ",";
-                try {
-                    //保存文件
-                    file.transferTo(new File(folder, newName));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String imgName = picname.substring(0, picname.length() - 1);
-            orgEntity.setFilePath(imgName);
-            orgEntity.setOrgCode(CodeUtils.getOrgCode());
-            return ResultModel.ok(orgService.insertOrg(orgEntity));
-        }else {
-            return ResultModel.errorMsg("上传失败");
-        }
+    public ResultModel UploadFile(OrgEntity orgEntity) {
+        orgEntity.setOrgCode(CodeUtils.getOrgCode());
+        return ResultModel.ok(orgService.insertOrg(orgEntity));
     }
 
     //删除组织

@@ -105,7 +105,12 @@ public class PageController {
 
     @GetMapping("/toAdd")
     public String toAdd(){
-        return "/backed/admin/add";
+        return "addOrg";
+    }
+
+    @GetMapping("/toAddProject")
+    public String toAddProject(){
+        return "/backed/admin/addProject";
     }
 
     //内容区显示项目待发布列表数据
