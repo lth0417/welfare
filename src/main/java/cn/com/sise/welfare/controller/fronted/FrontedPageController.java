@@ -29,20 +29,19 @@ public class FrontedPageController {
 
     //登录后跳转到前端页面
     @GetMapping("/user")
-    public String toFronted(Model model){
+    public String toFronted(Model model) {
+        QueryWrapper<FileEntity> fileEntityQueryWrapper = new QueryWrapper<>();
+        List<FileEntity> banners = fileMapper.selectList(fileEntityQueryWrapper);
+        model.addAttribute("banners", banners);
+        return "/fronted/index";
+    }
+
+    @GetMapping("/findWall")
+    public String findAllWall(Model model){
         QueryWrapper<FileEntity> fileEntityQueryWrapper= new QueryWrapper<>();
         List<FileEntity>banners= fileMapper.selectList(fileEntityQueryWrapper);
         model.addAttribute("banners",banners);
-        return "fronted/index";
+        return "/fronted/index";
     }
-
-//    @GetMapping("/findWall")
-//    public String findAllWall(Model model){
-//        QueryWrapper<FileEntity> fileEntityQueryWrapper= new QueryWrapper<>();
-//        List<FileEntity>banners= fileMapper.selectList(fileEntityQueryWrapper);
-//        model.addAttribute("banners",banners);
-//        return "/fronted/index";
-//    }
-
 
 }
