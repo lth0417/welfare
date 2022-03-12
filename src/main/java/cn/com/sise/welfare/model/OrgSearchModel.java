@@ -15,4 +15,5 @@ public class OrgSearchModel extends Page<OrgSearchModel> {
     private String createTime;
     private String status;
     private String reason;
+    private String pic;
 }
