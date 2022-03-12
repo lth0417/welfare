@@ -889,7 +889,7 @@ a cite {
 
 .layui-layout-right {
     position: absolute !important;
-    right: 0;
+    right: 40px;
     top: 0
 }
 
