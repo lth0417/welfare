@@ -12,11 +12,11 @@
     <div th:insert="fronted/header :: header"></div>
     <div class="layui-body">
         <ul>
-            <tr th:each="o:${orgresult}">
+            <tr th:each="o:${orgResult}">
                 <li class="tupian">
                     <div class="card">
                         <a>
-                            <div class="wall"><img th:src="@{${filePath+o.pic}}" width="295px" height="166">
+                            <div class="wall"><img th:src="${filePath+o.pic}" width="295px" height="166">
                             </div>
                             <p th:text="${o.orgName}"></p>
                             <!--<div>

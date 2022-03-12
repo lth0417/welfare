@@ -52,7 +52,8 @@ public class FrontedPageController {
     public String toShow(Model model){
         QueryWrapper<OrgEntity> orgEntityQueryWrapper=new QueryWrapper<>();
         List<OrgEntity> orgresult= orgMapper.selectList(orgEntityQueryWrapper);
-        model.addAttribute("orgresult",orgresult);
+        model.addAttribute("orgResult",orgresult);
+        model.addAttribute("filePath", path);
         model.addAttribute("filePath", path);
         return "/fronted/orgindex";
     }
