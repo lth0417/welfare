@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/lib/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
     <style type="text/css">
         .auto{
             margin: auto;
@@ -20,7 +19,7 @@
             <div class="layui-carousel auto" id="test10">
                 <div carousel-item="">
                     <div th:each="b:${banners}">
-                        <div><img th:src="@{${b.filePath}}" width="700px"></div>
+                        <div><img th:src="${filePath+b.filePath}" width="700px"></div>
                     </div>
                 </div>
             </div>
@@ -28,8 +27,7 @@
     </div>
 </div>
 
-
-<script src="/lib/layui/layui.js"></script>
+<script th:src="@{/lib/layui/layui.js}"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
     layui.use('element', function(){
