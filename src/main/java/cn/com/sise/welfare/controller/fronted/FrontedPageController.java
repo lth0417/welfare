@@ -43,12 +43,14 @@ public class FrontedPageController {
         return "/fronted/index";
     }
 
-    @GetMapping("/findWall")
-    public String findAllWall(Model model){
-        QueryWrapper<FileEntity> fileEntityQueryWrapper= new QueryWrapper<>();
-        List<FileEntity>banners= fileMapper.selectList(fileEntityQueryWrapper);
-        model.addAttribute("banners",banners);
-        return "/fronted/index";
+    @GetMapping("/toPersonalCenter")
+    public String toPersonalCenter(){
+        return "/fronted/personalCenter";
+    }
+
+    @GetMapping("/toAddOrg")
+    public String toAddOrg(){
+        return "fronted/addOrg";
     }
 
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--引入thymeleaf-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>从化农产品后台管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui2.6/css/layui.css}">
+</head>
+<style>
+    .layui-logo {
+        font-family: 华文行楷;
+    }
+</style>
+<body>
+
+    <div class="layui-body"
+         style="left: auto; right: auto; display: flex; justify-content: center; align-items: center;">
+        <form th:action="@{/org/insertOrg}"
+              class="layui-form layui-form-pane" th:method="post" style="margin-top:100px;margin-right: 150px"
+              enctype="multipart/form-data">
+            <div class="layui-form-item">
+                <label class="layui-form-label">组织代码</label>
+                <div class="layui-input-block">
+                    <input name="orgCode" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">组织名称</label>
+                <div class="layui-input-block">
+                    <input name="orgName" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input name="address" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-block">
+                    <input name="linkman" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-block">
+                    <input name="phone" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input name="email" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建日期</label>
+                <div class="layui-input-inline">
+                    <input name="createTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+                </div>
+            </div>
+            <div style="margin-left: 100px">
+                <div class="form-group" style="display:inline-block;vertical-align: top;">
+                    <div class="input-group"><span class="input-group-addon">产品图组</span>
+<!--                        <input th:type="file" name="file" multiple>-->
+                        <input type="hidden" name="filePath">
+                        <button type="button" class="layui-btn" id="upload">上传图片</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+                    <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<script type="text/javascript" th:src="@{/layui2.6/layui.js}" charset="UTF-8"></script>
+<script>
+    layui.use(['form', 'element','upload'], function () {
+        const form = layui.form;
+        const element = layui.element;
+        const upload = layui.upload;
+        const jQuery = layui.jquery;
+        const layer = layui.layer;
+
+        const $ = layui.$;
+        $("button[type='submit']").click(function () {
+            var st = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(st);
+            parent.window.location.href = "/toAuditList";
+        })
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#upload' //绑定元素
+            ,url: '/upload' //上传接口
+            ,multiple: true
+            ,done: function(res){
+                console.log(res)
+                //上传完毕回调
+                if (res.code == 200){
+                    var val = $('input[name="filePath"]').val();
+                    if (val == ""){
+                        $('input[name="filePath"]').val(res.data);
+                    }else{
+                        $('input[name="filePath"]').val(val+','+res.data);
+                    }
+                }
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+    });
+</script>
+</body>
+</html>
