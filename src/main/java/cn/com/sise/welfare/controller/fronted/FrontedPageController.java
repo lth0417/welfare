@@ -6,6 +6,7 @@ import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,18 @@ public class FrontedPageController {
     @Autowired
     private FileMapper fileMapper;
 
+    @Value("${upload.file.path}")
+    private String filePath;
+    @Value("${virtual.file.path}")
+    private String path;
+
     //登录后跳转到前端页面
     @GetMapping("/user")
     public String toFronted(Model model) {
         QueryWrapper<FileEntity> fileEntityQueryWrapper = new QueryWrapper<>();
         List<FileEntity> banners = fileMapper.selectList(fileEntityQueryWrapper);
         model.addAttribute("banners", banners);
+        model.addAttribute("filePath", path);
         return "/fronted/index";
     }
 

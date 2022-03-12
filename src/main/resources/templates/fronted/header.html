@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
     <title>Title</title>
     <style>
         .layui-logo {
@@ -11,50 +12,6 @@
     </style>
 </head>
 <body>
-<!--<div th:fragment="header" class="layui-header layui-bg-black">-->
-<!--    <div class="layui-logo">宿舍管理系统</div>-->
-<!--    <ul class="layui-nav layui-layout-right">-->
-<!--        <li class="layui-nav-item">-->
-<!--            <div sec:authorize="isAuthenticated()" style="padding-right: 10px">-->
-<!--                <span sec:authentication="name"></span>-->
-<!--            </div>-->
-<!--        </li>-->
-<!--        <li class="layui-nav-item layui-hide-xs">-->
-<!--            <form th:action="@{/mylogout}" th:method="post">-->
-<!--                <button type="submit" class="layui-btn layui-bg-black">退出</button>-->
-<!--            </form>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <div class="layui-side layui-bg-black">-->
-<!--        <div class="layui-side-scroll" style="background-color: #2F4056">-->
-<!--            &lt;!&ndash; 左侧导航区域（可配合layui已有的垂直导航） &ndash;&gt;-->
-<!--            <ul class="layui-nav layui-nav-tree" lay-filter="test">-->
-<!--                <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">学生信息管理</a>-->
-<!--                    <dl class="layui-nav-child">-->
-<!--                        <dd>-->
-<!--                            <a th:href="@{/dormManager/toStudent}">学生信息查询</a>-->
-<!--                        </dd>-->
-<!--                    </dl>-->
-<!--                </li>-->
-<!--                <li class="layui-nav-item"><a href="javascript:;">宿舍楼信息管理</a>-->
-<!--                    <dl class="layui-nav-child">-->
-<!--                        <dd>-->
-<!--                            <a th:href="@{/dormManager/toBuilding}">宿舍楼信息查询</a>-->
-<!--                        </dd>-->
-<!--                    </dl>-->
-<!--                </li>-->
-<!--                <li class="layui-nav-item"><a href="javascript:;">学生寝室管理</a>-->
-<!--                    <dl class="layui-nav-child">-->
-<!--                        <dd>-->
-<!--                            <a th:href="@{/dormManager/toBuilding}">寝室信息查询</a>-->
-<!--                        </dd>-->
-<!--                    </dl>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
     <div th:fragment="header" class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black">公益众筹系统</div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
