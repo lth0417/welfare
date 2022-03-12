@@ -14,7 +14,7 @@
 <div class="layui-layout layui-layout-admin">
     <div th:insert="fronted/header :: header"></div>
     <div class="layui-body">
-        <div style=" position: absolute !important;right: 30%; top: 10px">
+        <div style=" position: absolute !important;right: 30%; top: 10px;">
             <div class="layui-carousel auto" id="test10">
                 <div carousel-item="">
                     <div th:each="b:${banners}">
@@ -61,6 +61,7 @@
         var ins3 = carousel.render({
             elem: '#test3'
         });
+
         //图片轮播
         carousel.render({
             elem: '#test10'

@@ -1,7 +1,9 @@
 package cn.com.sise.welfare.controller.fronted;
 
 import cn.com.sise.welfare.entity.FileEntity;
+import cn.com.sise.welfare.entity.OrgEntity;
 import cn.com.sise.welfare.mapper.FileMapper;
+import cn.com.sise.welfare.mapper.OrgMapper;
 import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -28,6 +30,9 @@ public class FrontedPageController {
     @Autowired
     private FileMapper fileMapper;
 
+    @Autowired
+    private OrgMapper orgMapper;
+
     @Value("${upload.file.path}")
     private String filePath;
     @Value("${virtual.file.path}")
@@ -42,6 +47,15 @@ public class FrontedPageController {
         model.addAttribute("filePath", path);
         return "/fronted/index";
     }
+
+    @RequestMapping("/toshoworg")
+    public String toShow(Model model){
+        QueryWrapper<OrgEntity> orgEntityQueryWrapper=new QueryWrapper<>();
+        List<OrgEntity> orgresult= orgMapper.selectList(orgEntityQueryWrapper);
+        model.addAttribute("orgresult",orgresult);
+        return "/fronted/orgindex";
+    }
+
 
     @GetMapping("/toPersonalCenter")
     public String toPersonalCenter(){
