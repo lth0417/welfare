@@ -1,8 +1,10 @@
 package cn.com.sise.welfare;
 
 import cn.com.sise.welfare.entity.FileEntity;
+import cn.com.sise.welfare.entity.OrgEntity;
 import cn.com.sise.welfare.entity.UserEntity;
 import cn.com.sise.welfare.mapper.FileMapper;
+import cn.com.sise.welfare.mapper.OrgMapper;
 import cn.com.sise.welfare.mapper.UserMapper;
 import cn.com.sise.welfare.model.UserSearchModel;
 import cn.com.sise.welfare.service.UserService;
@@ -19,12 +21,11 @@ class WelfareApplicationTests {
 @Autowired
 private UserService userService;
     @Autowired
-    private FileMapper fileMapper;
+    private OrgMapper orgMapper;
     @Test
     void contextLoads() {
-        QueryWrapper<FileEntity> fileEntityQueryWrapper= new QueryWrapper<>();
-        List<FileEntity> banners= fileMapper.selectList(fileEntityQueryWrapper);
-        System.out.println(banners);
+        QueryWrapper<OrgEntity> orgEntityQueryWrapper=new QueryWrapper<>();
+        List<OrgEntity> orgresult= orgMapper.selectList(orgEntityQueryWrapper);
     }
 
 }

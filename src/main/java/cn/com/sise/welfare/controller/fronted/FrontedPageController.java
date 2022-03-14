@@ -52,8 +52,9 @@ public class FrontedPageController {
     public String toShow(Model model){
         QueryWrapper<OrgEntity> orgEntityQueryWrapper=new QueryWrapper<>();
         List<OrgEntity> orgresult= orgMapper.selectList(orgEntityQueryWrapper);
+        //查询组织人数
+
         model.addAttribute("orgResult",orgresult);
-        model.addAttribute("filePath", path);
         model.addAttribute("filePath", path);
         return "/fronted/orgindex";
     }
