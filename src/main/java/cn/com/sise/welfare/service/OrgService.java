@@ -4,10 +4,8 @@ import cn.com.sise.welfare.entity.OrgEntity;
 import cn.com.sise.welfare.model.OrgSearchModel;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.ibatis.annotations.Mapper;
 
-import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 
 public interface OrgService extends IService<OrgEntity> {
@@ -41,5 +39,6 @@ public interface OrgService extends IService<OrgEntity> {
     //组织禁用
     int updateBanOrg(OrgEntity orgEntity);
 
-
+    //根据组织编号查询组织人数
+    List<OrgEntity> findOrgNumByOrgCode(OrgEntity orgEntity);
 }

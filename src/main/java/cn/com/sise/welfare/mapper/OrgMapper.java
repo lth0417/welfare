@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface OrgMapper extends BaseMapper<OrgEntity> {
     //查询通过审核组织
@@ -21,5 +23,5 @@ public interface OrgMapper extends BaseMapper<OrgEntity> {
     //批量通过审核
     int passOrgList(String[] id);
 
-
+    List<OrgEntity> findOrgNumByOrgCode(OrgEntity orgEntity);
 }

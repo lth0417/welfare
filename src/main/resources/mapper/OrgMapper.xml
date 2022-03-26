@@ -106,5 +106,10 @@
         </foreach>
     </update>
 
+    <select id="findOrgNumByOrgCode" resultType="cn.com.sise.welfare.entity.OrgEntity">
+        select org_code as orgCode,count(linkman) as number
+        from tb_org
+        group by orgCode
+    </select>
 
 </mapper>

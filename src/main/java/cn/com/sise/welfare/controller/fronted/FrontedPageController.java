@@ -4,16 +4,16 @@ import cn.com.sise.welfare.entity.FileEntity;
 import cn.com.sise.welfare.entity.OrgEntity;
 import cn.com.sise.welfare.mapper.FileMapper;
 import cn.com.sise.welfare.mapper.OrgMapper;
+import cn.com.sise.welfare.service.OrgService;
 import cn.com.sise.welfare.utils.ResultModel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 
@@ -32,6 +32,8 @@ public class FrontedPageController {
 
     @Autowired
     private OrgMapper orgMapper;
+    @Autowired
+    private OrgService orgService;
 
     @Value("${upload.file.path}")
     private String filePath;
@@ -53,7 +55,6 @@ public class FrontedPageController {
         QueryWrapper<OrgEntity> orgEntityQueryWrapper=new QueryWrapper<>();
         List<OrgEntity> orgresult= orgMapper.selectList(orgEntityQueryWrapper);
         //查询组织人数
-
         model.addAttribute("orgResult",orgresult);
         model.addAttribute("filePath", path);
         return "/fronted/orgindex";
@@ -68,6 +69,12 @@ public class FrontedPageController {
     @GetMapping("/toAddOrg")
     public String toAddOrg(){
         return "fronted/addOrg";
+    }
+
+    @GetMapping("/findOrgNumByorgCode")
+    public ResultModel findOrgNumByorgCode(OrgEntity orgEntity){
+        List<OrgEntity> orgEntityList=orgService.findOrgNumByOrgCode(orgEntity);
+        return ResultModel.ok(orgEntityList);
     }
 
 }

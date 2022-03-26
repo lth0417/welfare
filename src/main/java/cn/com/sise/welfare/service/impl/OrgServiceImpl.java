@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.util.List;
 
 @Service("orgService")
 @Transactional
@@ -75,6 +74,11 @@ public class OrgServiceImpl extends ServiceImpl<OrgMapper, OrgEntity>implements 
         orgEntity.setStatus("99");
         orgEntity.setReason(orgEntity.getReason());
         return orgMapper.updateById(orgEntity);
+    }
+
+    @Override
+    public List<OrgEntity> findOrgNumByOrgCode(OrgEntity orgEntity) {
+        return orgMapper.findOrgNumByOrgCode(orgEntity);
     }
 
 
